@@ -1,3979 +1,2060 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>ToolVault — Premium Toolkit Builder</title>
 
 <meta name="description"
-      content="Create your own premium toolkit with unlimited tools, custom fonts, colors, categories and shareable links.">
+      content="Create premium toolkits with unlimited tools, custom colors, fonts and short public links.">
 
-<meta name="theme-color"
-      content="#07080d">
+<meta name="theme-color" content="#080b14">
 
-<!-- ================= FAVICON ================= -->
+<link rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%23080b14'/%3E%3Cpath d='M25 30h50v12H25zM25 48h38v12H25zM25 66h28v12H25z' fill='%237c5cff'/%3E%3C/svg%3E">
 
-<link
-rel="icon"
-type="image/svg+xml"
-href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%237c3aed'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='25' fill='%2307080d'/%3E%3Crect x='8' y='8' width='84' height='84' rx='21' fill='url(%23g)'/%3E%3Cpath d='M50 23L57 42L77 50L57 58L50 77L43 58L23 50L43 42Z' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-rel="apple-touch-icon"
-href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%237c3aed'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='25' fill='%2307080d'/%3E%3Crect x='8' y='8' width='84' height='84' rx='21' fill='url(%23g)'/%3E%3Cpath d='M50 23L57 42L77 50L57 58L50 77L43 58L23 50L43 42Z' fill='white'/%3E%3C/svg%3E">
-
-<!-- ================= FONTS ================= -->
-
-<link rel="preconnect"
-      href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
 
 <style>
 
-/* =====================================================
-   TOOLVAULT PREMIUM UI
-===================================================== */
-
 :root{
-
---bg:#05060a;
---panel:#0b0e15;
---panel2:#10141e;
-
---border:rgba(255,255,255,.09);
---border-hover:rgba(255,255,255,.18);
-
---text:#f8fafc;
---muted:#8991a3;
-
---primary:#7c3aed;
---secondary:#06b6d4;
-
---success:#22c55e;
---danger:#ef4444;
-
---radius:22px;
-
---shadow:
-0 25px 80px rgba(0,0,0,.45);
-
+    --bg:#070910;
+    --panel:rgba(15,18,30,.72);
+    --panel2:rgba(21,25,40,.8);
+    --border:rgba(255,255,255,.09);
+    --text:#f5f7ff;
+    --muted:#9298aa;
+    --primary:#7c5cff;
+    --secondary:#00d9ff;
+    --danger:#ff5577;
+    --radius:22px;
 }
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html{
-scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 15% 10%,rgba(124,92,255,.16),transparent 28%),
+        radial-gradient(circle at 85% 20%,rgba(0,217,255,.11),transparent 28%),
+        linear-gradient(135deg,#06070c,#0a0d17 55%,#070910);
+    color:var(--text);
+    font-family:Inter,sans-serif;
+    overflow-x:hidden;
+}
 
-min-height:100vh;
-
-color:var(--text);
-
-font-family:Inter,sans-serif;
-
-background:
-
-radial-gradient(
-circle at 10% 10%,
-rgba(124,58,237,.16),
-transparent 30%
-),
-
-radial-gradient(
-circle at 90% 15%,
-rgba(6,182,212,.12),
-transparent 28%
-),
-
-linear-gradient(
-135deg,
-#030409,
-#080a10 45%,
-#040509
-);
-
-overflow-x:hidden;
-
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.18;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:45px 45px;
 }
 
 button,
 input,
 textarea,
 select{
-font:inherit;
+    font:inherit;
 }
 
 button{
-cursor:pointer;
+    cursor:pointer;
 }
 
 .hidden{
-display:none!important;
+    display:none!important;
 }
 
+/* ================= HEADER ================= */
 
-/* =====================================================
-   BACKGROUND
-===================================================== */
-
-.background{
-
-position:fixed;
-inset:0;
-
-pointer-events:none;
-
-overflow:hidden;
-
-z-index:-1;
-
+header{
+    width:100%;
+    padding:22px 5%;
+    border-bottom:1px solid var(--border);
+    background:rgba(5,7,13,.58);
+    backdrop-filter:blur(22px);
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-.grid-bg{
-
-position:absolute;
-inset:0;
-
-background-image:
-
-linear-gradient(
-rgba(255,255,255,.025) 1px,
-transparent 1px
-),
-
-linear-gradient(
-90deg,
-rgba(255,255,255,.025) 1px,
-transparent 1px
-);
-
-background-size:50px 50px;
-
-mask-image:
-radial-gradient(
-ellipse at center,
-black 15%,
-transparent 78%
-);
-
+.nav{
+    max-width:1400px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
 }
 
-.orb{
-
-position:absolute;
-
-border-radius:50%;
-
-filter:blur(90px);
-
-opacity:.16;
-
-animation:
-floatOrb 12s ease-in-out infinite;
-
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:21px;
+    font-weight:800;
+    letter-spacing:-.5px;
 }
 
-.orb.one{
-
-width:420px;
-height:420px;
-
-background:var(--primary);
-
-left:-170px;
-top:8%;
-
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    box-shadow:0 0 30px rgba(124,92,255,.3);
 }
 
-.orb.two{
-
-width:350px;
-height:350px;
-
-background:var(--secondary);
-
-right:-130px;
-top:35%;
-
-animation-delay:-4s;
-
-}
-
-.orb.three{
-
-width:320px;
-height:320px;
-
-background:#9333ea;
-
-left:42%;
-bottom:-170px;
-
-animation-delay:-8s;
-
-}
-
-@keyframes floatOrb{
-
-0%,100%{
-transform:translate(0,0) scale(1);
-}
-
-50%{
-transform:translate(35px,-30px) scale(1.08);
-}
-
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.topbar{
-
-position:sticky;
-top:0;
-
-z-index:100;
-
-height:76px;
-
-display:flex;
-align-items:center;
-justify-content:space-between;
-
-padding:0 5%;
-
-border-bottom:
-1px solid var(--border);
-
-background:
-rgba(3,4,8,.72);
-
-backdrop-filter:
-blur(24px);
-
-animation:
-slideDown .6s ease;
-
-}
-
-@keyframes slideDown{
-
-from{
-opacity:0;
-transform:translateY(-20px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-.brand{
-
-display:flex;
-align-items:center;
-
-gap:12px;
-
-font-size:19px;
-
-font-weight:900;
-
-letter-spacing:-.5px;
-
-}
-
-.brand-icon{
-
-width:40px;
-height:40px;
-
-display:grid;
-place-items:center;
-
-border-radius:13px;
-
-background:
-linear-gradient(
-135deg,
-var(--primary),
-var(--secondary)
-);
-
-box-shadow:
-0 0 30px
-rgba(124,58,237,.35);
-
-animation:
-logoPulse 4s ease-in-out infinite;
-
-}
-
-@keyframes logoPulse{
-
-0%,100%{
-transform:scale(1);
-}
-
-50%{
-transform:scale(1.06);
-}
-
-}
-
-.status{
-
-display:flex;
-align-items:center;
-
-gap:8px;
-
-padding:8px 14px;
-
-border:
-1px solid var(--border);
-
-border-radius:999px;
-
-color:#aeb5c4;
-
-background:
-rgba(255,255,255,.035);
-
-font-size:12px;
-
-}
-
-.status-dot{
-
-width:7px;
-height:7px;
-
-border-radius:50%;
-
-background:#22c55e;
-
-box-shadow:
-0 0 12px #22c55e;
-
-animation:
-pulseDot 2s infinite;
-
-}
-
-@keyframes pulseDot{
-
-0%,100%{
-opacity:1;
-}
-
-50%{
-opacity:.35;
-}
-
-}
-
-
-/* =====================================================
-   BUILDER
-===================================================== */
-
-.builder{
-
-width:min(1220px,92%);
-
-margin:auto;
-
-padding:
-70px 0 110px;
-
-}
-
-.hero{
-
-max-width:850px;
-
-margin:
-0 auto 55px;
-
-text-align:center;
-
-animation:
-heroIn .8s ease;
-
-}
-
-@keyframes heroIn{
-
-from{
-opacity:0;
-transform:translateY(30px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
+.logo-icon svg{
+    width:22px;
 }
 
 .badge{
+    padding:7px 12px;
+    border-radius:999px;
+    border:1px solid rgba(124,92,255,.3);
+    background:rgba(124,92,255,.09);
+    color:#b9acff;
+    font-size:11px;
+    font-weight:700;
+}
 
-display:inline-flex;
+/* ================= MAIN ================= */
 
-padding:8px 15px;
+.container{
+    max-width:1400px;
+    margin:auto;
+    padding:55px 5% 100px;
+}
 
-border:
-1px solid
-rgba(124,58,237,.35);
-
-border-radius:999px;
-
-color:#c4b5fd;
-
-background:
-rgba(124,58,237,.08);
-
-font-size:11px;
-
-font-weight:800;
-
-letter-spacing:.7px;
-
-text-transform:uppercase;
-
+.hero{
+    text-align:center;
+    max-width:850px;
+    margin:0 auto 50px;
 }
 
 .hero h1{
-
-margin-top:22px;
-
-font-size:
-clamp(40px,6vw,74px);
-
-line-height:1;
-
-letter-spacing:-3.5px;
-
-font-weight:900;
-
+    font-size:clamp(42px,6vw,76px);
+    line-height:1;
+    letter-spacing:-4px;
+    font-weight:800;
+    background:linear-gradient(90deg,#fff,#a79bff,#6ceaff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:titleFloat 5s ease-in-out infinite;
 }
 
-.gradient-text{
-
-background:
-linear-gradient(
-90deg,
-#fff,
-var(--primary),
-var(--secondary)
-);
-
--webkit-background-clip:text;
-
-background-clip:text;
-
-color:transparent;
-
-background-size:200% auto;
-
-animation:
-gradientMove 5s linear infinite;
-
-}
-
-@keyframes gradientMove{
-
-to{
-background-position:
-200% center;
-}
-
+@keyframes titleFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-5px)}
 }
 
 .hero p{
-
-max-width:650px;
-
-margin:
-22px auto 0;
-
-color:var(--muted);
-
-line-height:1.8;
-
-font-size:15px;
-
+    color:var(--muted);
+    font-size:16px;
+    margin-top:20px;
+    line-height:1.7;
 }
 
+/* ================= LAYOUT ================= */
 
-/* =====================================================
-   PANELS
-===================================================== */
-
-.builder-grid{
-
-display:grid;
-
-grid-template-columns:
-minmax(0,1.35fr)
-minmax(330px,.65fr);
-
-gap:20px;
-
-align-items:start;
-
+.builder{
+    display:grid;
+    grid-template-columns:minmax(0,1.1fr) minmax(360px,.9fr);
+    gap:24px;
+    align-items:start;
 }
 
 .panel{
-
-border:
-1px solid var(--border);
-
-border-radius:var(--radius);
-
-background:
-linear-gradient(
-145deg,
-rgba(255,255,255,.045),
-rgba(255,255,255,.015)
-);
-
-box-shadow:
-var(--shadow);
-
-backdrop-filter:
-blur(24px);
-
-overflow:hidden;
-
-animation:
-panelIn .7s ease;
-
+    background:linear-gradient(
+        145deg,
+        rgba(19,23,37,.82),
+        rgba(9,11,19,.72)
+    );
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:26px;
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.04);
+    backdrop-filter:blur(20px);
 }
 
-@keyframes panelIn{
-
-from{
-opacity:0;
-transform:translateY(25px);
+.panel-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
 }
 
-to{
-opacity:1;
-transform:translateY(0);
+.panel-title h2{
+    font-size:18px;
 }
 
+.panel-title span{
+    color:var(--muted);
+    font-size:12px;
 }
 
-.panel-header{
-
-padding:
-24px 26px;
-
-border-bottom:
-1px solid var(--border);
-
-}
-
-.panel-header h2{
-
-font-size:18px;
-
-font-weight:800;
-
-}
-
-.panel-header p{
-
-margin-top:6px;
-
-color:var(--muted);
-
-font-size:12px;
-
-}
-
-.panel-body{
-
-padding:25px;
-
-}
-
-
-/* =====================================================
-   FORM
-===================================================== */
+/* ================= FORM ================= */
 
 .form-grid{
-
-display:grid;
-
-grid-template-columns:
-1fr 1fr;
-
-gap:16px;
-
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
 }
 
 .field{
-
-margin-bottom:17px;
-
+    margin-bottom:16px;
 }
 
 .field.full{
-
-grid-column:1/-1;
-
+    grid-column:1/-1;
 }
 
 .field label{
-
-display:block;
-
-margin-bottom:8px;
-
-color:#c8ceda;
-
-font-size:11px;
-
-font-weight:800;
-
-letter-spacing:.5px;
-
+    display:block;
+    font-size:12px;
+    color:#bfc4d5;
+    margin-bottom:8px;
+    font-weight:600;
 }
 
-.input,
-.select,
-.textarea{
-
-width:100%;
-
-padding:
-13px 14px;
-
-outline:none;
-
-border:
-1px solid var(--border);
-
-border-radius:13px;
-
-color:#fff;
-
-background:
-rgba(0,0,0,.24);
-
-transition:
-border .2s,
-box-shadow .2s,
-transform .2s;
-
+input,
+textarea,
+select{
+    width:100%;
+    border:1px solid rgba(255,255,255,.08);
+    outline:none;
+    color:#fff;
+    background:rgba(255,255,255,.035);
+    border-radius:14px;
+    padding:13px 14px;
+    transition:.25s;
 }
 
-.input:hover,
-.select:hover,
-.textarea:hover{
-
-border-color:
-var(--border-hover);
-
+textarea{
+    min-height:100px;
+    resize:vertical;
 }
 
-.input:focus,
-.select:focus,
-.textarea:focus{
-
-border-color:
-var(--primary);
-
-box-shadow:
-0 0 0 3px
-rgba(124,58,237,.11);
-
-transform:
-translateY(-1px);
-
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:rgba(124,92,255,.7);
+    box-shadow:0 0 0 4px rgba(124,92,255,.08);
+    background:rgba(255,255,255,.05);
 }
 
-.input::placeholder,
-.textarea::placeholder{
-
-color:#5f6777;
-
+select option{
+    background:#10131f;
 }
 
-.textarea{
-
-min-height:100px;
-
-resize:vertical;
-
-}
-
-
-/* =====================================================
-   COLORS
-===================================================== */
+/* ================= COLORS ================= */
 
 .color-row{
-
-display:grid;
-
-grid-template-columns:
-1fr 1fr;
-
-gap:12px;
-
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
 .color-box{
-
-padding:10px;
-
-border:
-1px solid var(--border);
-
-border-radius:13px;
-
-background:
-rgba(0,0,0,.22);
-
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:8px;
+    background:rgba(255,255,255,.03);
 }
 
-.color-box span{
-
-display:block;
-
-margin-bottom:7px;
-
-color:var(--muted);
-
-font-size:10px;
-
-font-weight:700;
-
+.color-box input[type=color]{
+    padding:0;
+    width:42px;
+    height:38px;
+    border:none;
+    border-radius:10px;
+    background:none;
 }
 
-.color-input{
+/* ================= TOOLS ================= */
 
-width:100%;
-height:40px;
-
-padding:0;
-
-border:0;
-
-background:transparent;
-
-cursor:pointer;
-
+.tools-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin:28px 0 15px;
 }
 
-
-/* =====================================================
-   TOOLS
-===================================================== */
-
-.tools-heading{
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-margin-bottom:12px;
-
+.tools-header h3{
+    font-size:15px;
 }
 
 .tool-count{
-
-padding:
-5px 9px;
-
-border-radius:999px;
-
-color:#bda9ff;
-
-background:
-rgba(124,58,237,.1);
-
-font-size:10px;
-
-font-weight:800;
-
+    color:var(--muted);
+    font-size:12px;
 }
 
-.tools-list{
-
-display:flex;
-
-flex-direction:column;
-
-gap:12px;
-
-}
-
-.tool-editor{
-
-position:relative;
-
-padding:18px;
-
-border:
-1px solid var(--border);
-
-border-radius:18px;
-
-background:
-rgba(0,0,0,.17);
-
-animation:
-toolIn .35s ease;
-
-transition:
-border .2s,
-transform .2s,
-background .2s;
-
-}
-
-.tool-editor:hover{
-
-border-color:
-var(--border-hover);
-
-background:
-rgba(255,255,255,.025);
-
-transform:
-translateY(-2px);
-
-}
-
-@keyframes toolIn{
-
-from{
-
-opacity:0;
-
-transform:
-translateY(10px)
-scale(.98);
-
-}
-
-to{
-
-opacity:1;
-
-transform:
-translateY(0)
-scale(1);
-
-}
-
-}
-
-.tool-editor-head{
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-margin-bottom:15px;
-
-}
-
-.tool-number{
-
-color:#a78bfa;
-
-font-size:10px;
-
-font-weight:900;
-
-letter-spacing:1px;
-
-}
-
-.remove-tool{
-
-width:31px;
-height:31px;
-
-display:grid;
-
-place-items:center;
-
-border:0;
-
-border-radius:9px;
-
-color:#f87171;
-
-background:
-rgba(239,68,68,.08);
-
-transition:.2s;
-
-}
-
-.remove-tool:hover{
-
-background:
-rgba(239,68,68,.16);
-
-transform:
-rotate(90deg);
-
-}
-
-.tool-fields{
-
-display:grid;
-
-grid-template-columns:70px 1fr;
-
-gap:12px;
-
-}
-
-.tool-icon{
-
-text-align:center;
-
-font-size:22px;
-
-padding-left:5px;
-padding-right:5px;
-
-}
-
-.tool-fields-right{
-
-display:grid;
-
-grid-template-columns:
-1fr 1fr;
-
-gap:10px;
-
-}
-
-.tool-small-full{
-
-grid-column:1/-1;
-
-}
-
-.tool-category{
-
-grid-column:1/-1;
-
-}
-
-
-/* =====================================================
-   ADD TOOL
-===================================================== */
-
-.add-tool{
-
-width:100%;
-
-margin-top:14px;
-
-padding:14px;
-
-border:
-1px dashed
-rgba(124,58,237,.5);
-
-border-radius:14px;
-
-color:#c4b5fd;
-
-background:
-rgba(124,58,237,.055);
-
-font-weight:800;
-
-transition:.25s;
-
-}
-
-.add-tool:hover{
-
-border-color:
-var(--primary);
-
-background:
-rgba(124,58,237,.12);
-
-transform:
-translateY(-2px);
-
-box-shadow:
-0 10px 30px
-rgba(124,58,237,.12);
-
-}
-
-
-/* =====================================================
-   ACTIONS
-===================================================== */
-
-.main-actions{
-
-display:flex;
-
-gap:10px;
-
-margin-top:22px;
-
-}
-
-.btn{
-
-border:0;
-
-border-radius:13px;
-
-padding:
-13px 18px;
-
-color:#fff;
-
-font-weight:800;
-
-transition:
-transform .2s,
-box-shadow .2s;
-
-}
-
-.btn:hover{
-
-transform:
-translateY(-2px);
-
-}
-
-.btn-primary{
-
-flex:1;
-
-background:
-linear-gradient(
-135deg,
-var(--primary),
-#5b21b6
-);
-
-box-shadow:
-0 15px 35px
-rgba(124,58,237,.25);
-
-}
-
-.btn-primary:hover{
-
-box-shadow:
-0 18px 45px
-rgba(124,58,237,.4);
-
-}
-
-.btn-secondary{
-
-border:
-1px solid var(--border);
-
-background:
-rgba(255,255,255,.05);
-
-}
-
-
-/* =====================================================
-   PREVIEW
-===================================================== */
-
-.preview-box{
-
-position:sticky;
-
-top:96px;
-
-}
-
-.preview-content{
-
-padding:24px;
-
-}
-
-.preview-card{
-
-padding:21px;
-
-border:
-1px solid var(--border);
-
-border-radius:20px;
-
-background:
-rgba(255,255,255,.025);
-
-transition:.3s;
-
-}
-
-.preview-card:hover{
-
-border-color:
-rgba(124,58,237,.25);
-
-box-shadow:
-0 20px 50px
-rgba(0,0,0,.25);
-
-}
-
-.preview-brand{
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-}
-
-.preview-logo{
-
-width:46px;
-height:46px;
-
-display:grid;
-
-place-items:center;
-
-border-radius:14px;
-
-background:
-linear-gradient(
-135deg,
-var(--primary),
-var(--secondary)
-);
-
-font-weight:900;
-
-box-shadow:
-0 10px 30px
-rgba(124,58,237,.2);
-
-}
-
-.preview-brand h3{
-
-font-size:15px;
-
-}
-
-.preview-brand p{
-
-margin-top:3px;
-
-color:var(--muted);
-
-font-size:10px;
-
-}
-
-.preview-welcome{
-
-margin-top:25px;
-
-font-size:23px;
-
-font-weight:900;
-
-line-height:1.2;
-
-}
-
-.preview-desc{
-
-margin-top:10px;
-
-color:var(--muted);
-
-font-size:11px;
-
-line-height:1.7;
-
-}
-
-.mini-tools{
-
-display:grid;
-
-gap:8px;
-
-margin-top:20px;
-
-}
-
-.mini-tool{
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-
-padding:11px;
-
-border:
-1px solid var(--border);
-
-border-radius:12px;
-
-background:
-rgba(255,255,255,.025);
-
-transition:.2s;
-
-}
-
-.mini-tool:hover{
-
-transform:
-translateX(4px);
-
-border-color:
-rgba(124,58,237,.25);
-
-}
-
-.mini-icon{
-
-width:32px;
-height:32px;
-
-display:grid;
-
-place-items:center;
-
-border-radius:9px;
-
-background:
-rgba(124,58,237,.11);
-
-}
-
-.mini-tool span{
-
-font-size:11px;
-
-font-weight:700;
-
-}
-
-.preview-footer{
-
-margin-top:16px;
-
-padding-top:15px;
-
-border-top:
-1px solid var(--border);
-
-color:#626b7c;
-
-font-size:10px;
-
-text-align:center;
-
-}
-
-
-/* =====================================================
-   GENERATED TOOLKIT
-===================================================== */
-
-.toolkit-page{
-
-min-height:100vh;
-
---primary:#7c3aed;
---secondary:#06b6d4;
-
-background:
-
-radial-gradient(
-circle at 15% 5%,
-var(--primary-glow),
-transparent 30%
-),
-
-radial-gradient(
-circle at 85% 20%,
-var(--secondary-glow),
-transparent 28%
-),
-
-#05060a;
-
-}
-
-.toolkit-nav{
-
-position:sticky;
-
-top:0;
-
-z-index:50;
-
-height:74px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-padding:
-0 5%;
-
-border-bottom:
-1px solid
-rgba(255,255,255,.08);
-
-background:
-rgba(5,6,10,.72);
-
-backdrop-filter:
-blur(24px);
-
-}
-
-.toolkit-brand{
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-font-weight:900;
-
-}
-
-.toolkit-logo{
-
-width:40px;
-height:40px;
-
-display:grid;
-
-place-items:center;
-
-border-radius:13px;
-
-background:
-linear-gradient(
-135deg,
-var(--primary),
-var(--secondary)
-);
-
-box-shadow:
-0 0 30px
-var(--primary-glow);
-
-}
-
-.toolkit-nav-actions{
-
-display:flex;
-
-gap:8px;
-
-}
-
-.nav-btn{
-
-border:
-1px solid
-rgba(255,255,255,.08);
-
-border-radius:10px;
-
-padding:
-9px 14px;
-
-color:#fff;
-
-background:
-rgba(255,255,255,.05);
-
-transition:.2s;
-
-}
-
-.nav-btn:hover{
-
-background:
-rgba(255,255,255,.09);
-
-transform:
-translateY(-2px);
-
-}
-
-
-/* =====================================================
-   PUBLIC HERO
-===================================================== */
-
-.toolkit-main{
-
-width:min(1180px,92%);
-
-margin:auto;
-
-padding:
-80px 0 100px;
-
-}
-
-.toolkit-hero{
-
-max-width:800px;
-
-margin:
-0 auto 50px;
-
-text-align:center;
-
-animation:
-publicHero .8s ease;
-
-}
-
-@keyframes publicHero{
-
-from{
-
-opacity:0;
-
-transform:
-translateY(25px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:
-translateY(0);
-
-}
-
-}
-
-.toolkit-hero h1{
-
-font-size:
-clamp(40px,6vw,70px);
-
-line-height:1.02;
-
-letter-spacing:-3px;
-
-font-weight:900;
-
-}
-
-.toolkit-hero p{
-
-margin-top:18px;
-
-color:var(--muted);
-
-line-height:1.8;
-
-font-size:14px;
-
-}
-
-.tool-search{
-
-width:min(590px,100%);
-
-margin:
-27px auto 0;
-
-}
-
-.tool-search input{
-
-width:100%;
-
-padding:
-16px 19px;
-
-border:
-1px solid
-rgba(255,255,255,.1);
-
-border-radius:16px;
-
-outline:none;
-
-color:#fff;
-
-background:
-rgba(255,255,255,.045);
-
-backdrop-filter:
-blur(12px);
-
-transition:.2s;
-
-}
-
-.tool-search input:focus{
-
-border-color:
-var(--primary);
-
-box-shadow:
-0 0 0 3px
-var(--primary-glow);
-
-}
-
-
-/* =====================================================
-   PUBLIC TOOLS
-===================================================== */
-
-.tools-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
-gap:17px;
-
-}
-
-.public-tool{
-
-position:relative;
-
-min-height:220px;
-
-display:flex;
-
-flex-direction:column;
-
-padding:23px;
-
-border:
-1px solid
-rgba(255,255,255,.09);
-
-border-radius:22px;
-
-color:#fff;
-
-text-decoration:none;
-
-background:
-linear-gradient(
-145deg,
-rgba(255,255,255,.055),
-rgba(255,255,255,.015)
-);
-
-overflow:hidden;
-
-transition:
-transform .3s,
-border .3s,
-box-shadow .3s;
-
-animation:
-cardIn .5s ease both;
-
+.tool-card{
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.025);
+    border-radius:18px;
+    padding:17px;
+    margin-bottom:13px;
+    animation:cardIn .35s ease;
 }
 
 @keyframes cardIn{
-
-from{
-
-opacity:0;
-
-transform:
-translateY(20px)
-scale(.97);
-
+    from{
+        opacity:0;
+        transform:translateY(10px) scale(.98);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
-to{
-
-opacity:1;
-
-transform:
-translateY(0)
-scale(1);
-
+.tool-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
 }
 
+.tool-number{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-size:12px;
+    font-weight:700;
 }
 
-.public-tool::before{
-
-content:"";
-
-position:absolute;
-
-width:150px;
-height:150px;
-
-right:-70px;
-top:-70px;
-
-border-radius:50%;
-
-background:
-var(--primary);
-
-opacity:.11;
-
-filter:blur(12px);
-
-transition:.3s;
-
+.tool-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--primary);
+    box-shadow:0 0 12px var(--primary);
 }
 
-.public-tool::after{
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-border-radius:inherit;
-
-background:
-linear-gradient(
-120deg,
-transparent 35%,
-rgba(255,255,255,.05),
-transparent 65%
-);
-
-transform:
-translateX(-120%);
-
-transition:.7s;
-
+.remove-tool{
+    width:31px;
+    height:31px;
+    border:none;
+    border-radius:9px;
+    color:#ff7794;
+    background:rgba(255,85,119,.08);
+    transition:.2s;
 }
 
-.public-tool:hover::after{
-
-transform:
-translateX(120%);
-
+.remove-tool:hover{
+    background:rgba(255,85,119,.18);
+    transform:scale(1.05);
 }
 
-.public-tool:hover{
-
-transform:
-translateY(-8px);
-
-border-color:
-var(--primary);
-
-box-shadow:
-
-0 25px 70px
-rgba(0,0,0,.42),
-
-0 0 35px
-var(--primary-glow);
-
+.tool-grid{
+    display:grid;
+    grid-template-columns:80px 1fr 1fr;
+    gap:11px;
 }
 
-.public-tool-icon{
-
-width:54px;
-height:54px;
-
-display:grid;
-
-place-items:center;
-
-border-radius:16px;
-
-font-size:25px;
-
-background:
-rgba(255,255,255,.065);
-
-border:
-1px solid
-rgba(255,255,255,.06);
-
-margin-bottom:22px;
-
-transition:.25s;
-
+.tool-grid .description{
+    grid-column:2/-1;
 }
 
-.public-tool:hover
-.public-tool-icon{
-
-transform:
-scale(1.08)
-rotate(-3deg);
-
-background:
-var(--primary-glow);
-
+.tool-icon-input{
+    text-align:center;
+    font-size:23px;
 }
 
-.public-tool h3{
+/* ================= BUTTONS ================= */
 
-font-size:17px;
-
-font-weight:800;
-
-margin-bottom:8px;
-
+.btn{
+    border:none;
+    border-radius:13px;
+    padding:13px 17px;
+    color:#fff;
+    font-weight:700;
+    transition:.25s;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
 }
 
-.public-tool p{
-
-color:#8e97a8;
-
-font-size:12px;
-
-line-height:1.65;
-
+.btn:hover{
+    transform:translateY(-2px);
 }
 
-.tool-category-badge{
+.btn-primary{
+    background:linear-gradient(135deg,var(--primary),#9a82ff);
+    box-shadow:0 12px 30px rgba(124,92,255,.22);
+}
 
-position:absolute;
+.btn-secondary{
+    background:rgba(255,255,255,.055);
+    border:1px solid var(--border);
+}
 
-top:18px;
-right:18px;
+.btn-add{
+    width:100%;
+    margin-top:5px;
+    background:rgba(124,92,255,.08);
+    border:1px dashed rgba(124,92,255,.45);
+    color:#b9adff;
+}
 
-padding:
-5px 8px;
+.actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:22px;
+}
 
-border-radius:999px;
+/* ================= PREVIEW ================= */
 
-color:#aeb6c7;
+.preview-wrap{
+    position:sticky;
+    top:105px;
+}
 
-background:
-rgba(255,255,255,.045);
+.preview-screen{
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+    background:#090c14;
+    min-height:600px;
+}
 
-font-size:9px;
+.preview-topbar{
+    height:42px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:0 14px;
+}
 
-font-weight:700;
+.window-dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#555;
+}
 
+.preview-content{
+    padding:35px 22px;
+}
+
+.preview-brand{
+    color:var(--muted);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.preview-title{
+    font-size:31px;
+    margin-top:10px;
+    line-height:1.1;
+}
+
+.preview-description{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+    margin-top:10px;
+}
+
+.preview-tools{
+    margin-top:27px;
+    display:grid;
+    gap:11px;
+}
+
+.preview-tool{
+    padding:15px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    background:rgba(255,255,255,.035);
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.preview-icon{
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border-radius:11px;
+    background:rgba(124,92,255,.13);
+    font-size:19px;
+}
+
+.preview-tool strong{
+    display:block;
+    font-size:13px;
+}
+
+.preview-tool small{
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* ================= RESULT ================= */
+
+.result{
+    margin-top:24px;
+    padding:24px;
+    border:1px solid rgba(0,217,255,.16);
+    border-radius:20px;
+    background:
+        radial-gradient(circle at top right,rgba(0,217,255,.08),transparent 40%),
+        rgba(0,217,255,.025);
+    display:none;
+    animation:resultIn .4s ease;
+}
+
+@keyframes resultIn{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.result.show{
+    display:block;
+}
+
+.result h3{
+    font-size:17px;
+}
+
+.result p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:6px;
+}
+
+.short-link{
+    display:flex;
+    gap:10px;
+    margin-top:17px;
+}
+
+.short-link input{
+    color:#7cecff;
+    font-weight:600;
+}
+
+.result-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:10px;
+}
+
+/* ================= TOOLKIT PAGE ================= */
+
+.toolkit-page{
+    min-height:100vh;
+    padding:70px 5%;
+    display:none;
+}
+
+.toolkit-page.active{
+    display:block;
+}
+
+.builder-page.hidden-page{
+    display:none;
+}
+
+.toolkit-container{
+    max-width:1100px;
+    margin:auto;
+}
+
+.toolkit-head{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.toolkit-brand{
+    font-size:12px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-weight:700;
+}
+
+.toolkit-head h1{
+    font-size:clamp(40px,6vw,70px);
+    letter-spacing:-3px;
+    margin-top:12px;
+}
+
+.toolkit-head p{
+    color:var(--muted);
+    max-width:700px;
+    margin:15px auto 0;
+    line-height:1.7;
+}
+
+.tool-search{
+    max-width:500px;
+    margin:25px auto;
+}
+
+.public-tools{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:17px;
+}
+
+.public-card{
+    position:relative;
+    overflow:hidden;
+    padding:22px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.035);
+    border-radius:20px;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.public-card:before{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    right:-60px;
+    top:-60px;
+    background:var(--tool-primary);
+    opacity:.08;
+    filter:blur(20px);
+    border-radius:50%;
+}
+
+.public-card:hover{
+    transform:translateY(-7px);
+    border-color:var(--tool-primary);
+    box-shadow:0 20px 50px rgba(0,0,0,.28);
+}
+
+.public-icon{
+    width:54px;
+    height:54px;
+    display:grid;
+    place-items:center;
+    border-radius:15px;
+    background:color-mix(in srgb,var(--tool-primary) 13%,transparent);
+    font-size:25px;
+    margin-bottom:17px;
+}
+
+.category{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:999px;
+    font-size:9px;
+    font-weight:700;
+    color:var(--tool-primary);
+    background:color-mix(in srgb,var(--tool-primary) 10%,transparent);
+    margin-bottom:9px;
+}
+
+.public-card h3{
+    font-size:17px;
+}
+
+.public-card p{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.6;
+    margin-top:8px;
+    min-height:38px;
 }
 
 .open-label{
-
-margin-top:auto;
-
-padding-top:20px;
-
-color:#bda9ff;
-
-font-size:10px;
-
-font-weight:900;
-
-letter-spacing:.5px;
-
-transition:.2s;
-
+    display:block;
+    margin-top:18px;
+    color:var(--tool-primary);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.8px;
 }
 
-.public-tool:hover
-.open-label{
-
-color:#fff;
-
-transform:
-translateX(4px);
-
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-.toolkit-footer{
-
-width:min(1180px,92%);
-
-margin:auto;
-
-padding:
-30px 0 55px;
-
-border-top:
-1px solid
-rgba(255,255,255,.08);
-
-color:#687184;
-
-font-size:11px;
-
-text-align:center;
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
+/* ================= TOAST ================= */
 
 .toast{
-
-position:fixed;
-
-left:50%;
-bottom:25px;
-
-z-index:999;
-
-transform:
-translate(-50%,30px)
-scale(.95);
-
-opacity:0;
-
-pointer-events:none;
-
-padding:
-13px 18px;
-
-border:
-1px solid
-rgba(255,255,255,.1);
-
-border-radius:13px;
-
-color:#fff;
-
-background:
-rgba(20,23,32,.95);
-
-backdrop-filter:
-blur(20px);
-
-box-shadow:
-0 20px 60px
-rgba(0,0,0,.5);
-
-font-size:12px;
-
-font-weight:800;
-
-transition:.3s;
-
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    z-index:999;
+    padding:14px 18px;
+    border:1px solid var(--border);
+    background:rgba(15,18,30,.9);
+    backdrop-filter:blur(20px);
+    border-radius:14px;
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    font-size:12px;
 }
 
 .toast.show{
-
-opacity:1;
-
-transform:
-translate(-50%,0)
-scale(1);
-
+    transform:translateY(0);
+    opacity:1;
 }
 
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+/* ================= RESPONSIVE ================= */
 
 @media(max-width:1000px){
 
-.builder-grid{
+    .builder{
+        grid-template-columns:1fr;
+    }
 
-grid-template-columns:1fr;
-
-}
-
-.preview-box{
-
-position:relative;
-
-top:auto;
-
-}
-
-.tools-grid{
-
-grid-template-columns:
-repeat(2,1fr);
-
-}
+    .preview-wrap{
+        position:static;
+    }
 
 }
 
 @media(max-width:650px){
 
-.topbar{
+    .container{
+        padding:35px 4% 70px;
+    }
 
-padding:
-0 4%;
+    .hero h1{
+        letter-spacing:-2px;
+    }
 
-}
+    .panel{
+        padding:18px;
+    }
 
-.status{
+    .form-grid{
+        grid-template-columns:1fr;
+    }
 
-display:none;
+    .field.full{
+        grid-column:auto;
+    }
 
-}
+    .tool-grid{
+        grid-template-columns:60px 1fr;
+    }
 
-.builder{
+    .tool-grid input:nth-child(2){
+        grid-column:2;
+    }
 
-width:94%;
+    .tool-grid input:nth-child(3){
+        grid-column:2;
+    }
 
-padding-top:45px;
+    .tool-grid .description{
+        grid-column:1/-1;
+    }
 
-}
+    .actions{
+        grid-template-columns:1fr;
+    }
 
-.hero h1{
+    .short-link{
+        flex-direction:column;
+    }
 
-letter-spacing:-2px;
+    .result-actions{
+        grid-template-columns:1fr;
+    }
 
-}
-
-.form-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.field.full{
-
-grid-column:auto;
-
-}
-
-.tool-fields{
-
-grid-template-columns:1fr;
-
-}
-
-.tool-fields-right{
-
-grid-template-columns:1fr;
-
-}
-
-.tool-small-full,
-.tool-category{
-
-grid-column:auto;
-
-}
-
-.main-actions{
-
-flex-direction:column;
-
-}
-
-.tools-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.toolkit-nav{
-
-padding:
-0 4%;
-
-}
-
-.toolkit-main{
-
-width:94%;
-
-padding-top:50px;
-
-}
-
-.toolkit-hero h1{
-
-letter-spacing:-2px;
-
-}
-
-.nav-btn{
-
-padding:
-8px 10px;
-
-font-size:10px;
-
-}
+    .nav .badge{
+        display:none;
+    }
 
 }
 
 </style>
 </head>
 
-
 <body>
 
+<!-- ================= BUILDER ================= -->
 
-<!-- =====================================================
-     BACKGROUND
-===================================================== -->
+<div id="builderPage" class="builder-page">
 
-<div class="background">
+<header>
 
-<div class="grid-bg"></div>
+<div class="nav">
 
-<div class="orb one"></div>
+<div class="logo">
 
-<div class="orb two"></div>
-
-<div class="orb three"></div>
-
-</div>
-
-
-<!-- =====================================================
-     BUILDER PAGE
-===================================================== -->
-
-<div id="builderPage">
-
-
-<header class="topbar">
-
-
-<div class="brand">
-
-<div class="brand-icon">
-✦
+<div class="logo-icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M5 5h14v3H5V5Zm0 5h10v3H5v-3Zm0 5h7v3H5v-3Z"
+fill="white"/>
+</svg>
 </div>
 
 ToolVault
 
 </div>
 
-
-<div class="status">
-
-<span class="status-dot"></span>
-
-Builder Online
-
+<div class="badge">
+PREMIUM TOOLKIT BUILDER
 </div>
 
+</div>
 
 </header>
 
-
-<main class="builder">
-
+<main class="container">
 
 <section class="hero">
 
-
-<span class="badge">
-
-Premium Toolkit Builder
-
-</span>
-
-
-<h1>
-
-Build Your
-
-<span class="gradient-text">
-
-Ultimate Toolkit
-
-</span>
-
-</h1>
-
+<h1>Build Your Toolkit.</h1>
 
 <p>
-
-Create a beautiful professional toolkit with
-unlimited tools, custom branding, premium fonts,
-colors and shareable links.
-
+Create your own premium tool collection with unlimited tools,
+custom fonts, colors, branding and a short public link.
 </p>
-
 
 </section>
 
+<section class="builder">
 
-<div class="builder-grid">
+<!-- LEFT -->
 
+<div class="panel">
 
-<!-- =================================================
-     TOOLKIT SETTINGS
-================================================= -->
+<div class="panel-title">
 
-<section class="panel">
-
-
-<div class="panel-header">
-
-<h2>
-Toolkit Details
-</h2>
-
-<p>
-Customize your toolkit identity and appearance.
-</p>
-
+<div>
+<h2>Toolkit Settings</h2>
+<span>Customize your public toolkit</span>
 </div>
 
-
-<div class="panel-body">
-
+</div>
 
 <div class="form-grid">
 
-
 <div class="field">
 
-<label>
-TOOLKIT NAME
-</label>
+<label>Toolkit Name</label>
 
 <input
 id="toolkitName"
-class="input"
-placeholder="e.g. My AI Toolkit">
+placeholder="My AI Toolkit"
+value="My Premium Toolkit">
 
 </div>
-
 
 <div class="field">
 
-<label>
-YOUR NAME / BRAND
-</label>
+<label>Your Brand / Name</label>
 
 <input
-id="ownerName"
-class="input"
-placeholder="e.g. Novexa Digital">
+id="brandName"
+placeholder="Your Brand"
+value="Novexa Digital Agency">
 
 </div>
 
-
 <div class="field full">
 
-<label>
-WELCOME HEADING
-</label>
+<label>Welcome Heading</label>
 
 <input
-id="welcomeText"
-class="input"
-placeholder="Welcome to my premium toolkit">
+id="welcomeHeading"
+placeholder="Welcome to my toolkit"
+value="Welcome to My Toolkit">
 
 </div>
 
-
 <div class="field full">
 
-<label>
-TOOLKIT DESCRIPTION
-</label>
+<label>Toolkit Description</label>
 
 <textarea
-id="description"
-class="textarea"
-placeholder="Describe your toolkit..."></textarea>
+id="toolkitDescription"
+placeholder="Describe your toolkit..."
+>Everything you need, organized in one premium toolkit.</textarea>
 
 </div>
-
-
-</div>
-
 
 <div class="field">
 
-<label>
-FONT STYLE
-</label>
+<label>Font Style</label>
 
-<select
-id="fontFamily"
-class="select">
+<select id="fontStyle">
 
-<option value="Inter">
-Inter — Modern
-</option>
-
-<option value="Manrope">
-Manrope — Premium
-</option>
-
-<option value="Poppins">
-Poppins — Friendly
-</option>
-
-<option value="Space Grotesk">
-Space Grotesk — Tech
-</option>
-
-<option value="DM Sans">
-DM Sans — Clean
-</option>
+<option value="Inter">Inter</option>
+<option value="Manrope">Manrope</option>
+<option value="Poppins">Poppins</option>
+<option value="Space Grotesk">Space Grotesk</option>
+<option value="DM Sans">DM Sans</option>
 
 </select>
 
 </div>
 
-
 <div class="field">
 
-<label>
-CUSTOM COLORS
-</label>
-
+<label>Colors</label>
 
 <div class="color-row">
 
+<div class="color-box">
+
+<input id="primaryColor" type="color" value="#7c5cff">
+
+</div>
 
 <div class="color-box">
 
-<span>
-PRIMARY COLOR
-</span>
-
-<input
-id="primaryColor"
-class="color-input"
-type="color"
-value="#7c3aed">
-
-</div>
-
-
-<div class="color-box">
-
-<span>
-SECONDARY COLOR
-</span>
-
-<input
-id="secondaryColor"
-class="color-input"
-type="color"
-value="#06b6d4">
-
-</div>
-
+<input id="secondaryColor" type="color" value="#00d9ff">
 
 </div>
 
 </div>
 
+</div>
 
-<div class="field">
+</div>
 
+<div class="tools-header">
 
-<div class="tools-heading">
+<h3>Your Tools</h3>
 
-<label>
-YOUR TOOLS
-</label>
-
-<span
-id="toolCount"
-class="tool-count">
-
-0 Tools
-
+<span class="tool-count" id="toolCount">
+0 tools
 </span>
 
 </div>
 
-
-<div
-id="toolsList"
-class="tools-list">
-</div>
-
+<div id="toolsContainer"></div>
 
 <button
-class="add-tool"
+class="btn btn-add"
 onclick="addTool()">
 
 ＋ Add Another Tool
 
 </button>
 
-
-</div>
-
-
-<div class="main-actions">
-
-
-<button
-class="btn btn-secondary"
-onclick="clearAll">
-
-Clear
-
-</button>
-
+<div class="actions">
 
 <button
 class="btn btn-primary"
 onclick="generateToolkit()">
 
-✦ Generate Toolkit
+⚡ Generate Toolkit
 
 </button>
 
+<button
+class="btn btn-secondary"
+onclick="clearAll()">
+
+↻ Clear
+
+</button>
 
 </div>
 
+<div id="result" class="result">
 
-</div>
-
-</section>
-
-
-<!-- =================================================
-     LIVE PREVIEW
-================================================= -->
-
-<section
-class="panel preview-box">
-
-
-<div class="panel-header">
-
-<h2>
-Live Preview
-</h2>
+<h3>🎉 Your Toolkit Is Ready</h3>
 
 <p>
-See your toolkit before publishing.
+Your toolkit has been generated. Use the short link below to open it.
 </p>
 
-</div>
+<div class="short-link">
 
+<input
+id="generatedLink"
+readonly>
 
-<div class="preview-content">
+<button
+class="btn btn-primary"
+onclick="copyLink()">
 
+Copy Link
 
-<div class="preview-card">
-
-
-<div class="preview-brand">
-
-
-<div
-id="previewLogo"
-class="preview-logo">
-
-TV
+</button>
 
 </div>
 
+<div class="result-actions">
+
+<button
+class="btn btn-secondary"
+onclick="openGeneratedToolkit()">
+
+Open Toolkit
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT PREVIEW -->
+
+<div class="preview-wrap">
+
+<div class="panel">
+
+<div class="panel-title">
 
 <div>
+<h2>Live Preview</h2>
+<span>See your toolkit before publishing</span>
+</div>
 
-<h3
-id="previewName">
+</div>
 
-My Toolkit
+<div class="preview-screen">
 
-</h3>
+<div class="preview-topbar">
 
+<span class="window-dot"></span>
+<span class="window-dot"></span>
+<span class="window-dot"></span>
 
-<p
-id="previewOwner">
+</div>
 
-Created by You
+<div class="preview-content"
+id="previewContent">
 
+<div class="preview-brand"
+id="previewBrand">
+NOVEXA DIGITAL AGENCY
+</div>
+
+<h2 class="preview-title"
+id="previewTitle">
+Welcome to My Toolkit
+</h2>
+
+<p class="preview-description"
+id="previewDescription">
+Everything you need, organized in one premium toolkit.
 </p>
 
-</div>
-
-
-</div>
-
-
-<div
-id="previewWelcome"
-class="preview-welcome">
-
-Welcome to my toolkit
+<div class="preview-tools"
+id="previewTools"></div>
 
 </div>
 
-
-<div
-id="previewDesc"
-class="preview-desc">
-
-Your professional collection of useful tools.
-
 </div>
 
-
-<div
-id="previewTools"
-class="mini-tools">
 </div>
-
-
-<div class="preview-footer">
-
-Live Preview • ToolVault
-
-</div>
-
-
-</div>
-
 
 </div>
 
 </section>
-
-
-</div>
 
 </main>
 
 </div>
 
 
-<!-- =====================================================
-     GENERATED TOOLKIT PAGE
-===================================================== -->
+<!-- ================= PUBLIC TOOLKIT ================= -->
+
+<div id="toolkitPage" class="toolkit-page">
+
+<div class="toolkit-container">
+
+<div class="toolkit-head">
 
 <div
-id="toolkitPage"
-class="toolkit-page hidden">
-
-
-<nav class="toolkit-nav">
-
-
-<div class="toolkit-brand">
-
-
-<div
-id="publicLogo"
-class="toolkit-logo">
-
-TV
-
+class="toolkit-brand"
+id="publicBrand">
+BRAND
 </div>
 
-
-<span
-id="publicName">
-
-My Toolkit
-
-</span>
-
-
-</div>
-
-
-<div class="toolkit-nav-actions">
-
-
-<button
-class="nav-btn"
-onclick="copyCurrentLink()">
-
-🔗 Copy Link
-
-</button>
-
-
-</div>
-
-
-</nav>
-
-
-<main class="toolkit-main">
-
-
-<section class="toolkit-hero">
-
-
-<h1
-id="publicWelcome">
-
-Welcome to my toolkit
-
+<h1 id="publicTitle">
+Toolkit
 </h1>
 
-
-<p
-id="publicDescription">
-
-Professional collection of useful tools.
-
+<p id="publicDescription">
 </p>
 
-
 <div class="tool-search">
-
 
 <input
 id="toolSearch"
 placeholder="Search tools..."
-oninput="filterTools()">
-
-
-</div>
-
-
-</section>
-
-
-<section
-id="publicTools"
-class="tools-grid">
-
-</section>
-
-
-</main>
-
-
-<footer class="toolkit-footer">
-
-Crafted with ToolVault
-•
-Created by
-
-<span
-id="publicOwner">
-
-You
-
-</span>
-
-</footer>
-
+oninput="searchPublicTools()">
 
 </div>
 
-
-<!-- TOAST -->
+</div>
 
 <div
-id="toast"
-class="toast">
+id="publicTools"
+class="public-tools">
+</div>
+
+</div>
+
+</div>
+
+
+<div id="toast" class="toast">
+Copied!
 </div>
 
 
 <script>
 
-/* =====================================================
-   TOOLVAULT JAVASCRIPT
-===================================================== */
+/* =========================================================
+   TOOLVAULT PREMIUM TOOLKIT BUILDER
+   ========================================================= */
 
-const $ =
-id =>
-document.getElementById(id);
+const toolsContainer =
+document.getElementById("toolsContainer");
 
-let toolCounter = 0;
-
-
-/* =====================================================
-   URL NORMALIZER
-===================================================== */
-
-function normalizeURL(url){
-
-url =
-String(url || "")
-.trim();
-
-if(!url)
-return "";
-
-if(
-!/^https?:\/\//i.test(url)
-){
-
-url =
-"https://" + url;
-
-}
-
-return url;
-
-}
+let tools = [];
 
 
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
+/* ================= UTILITIES ================= */
 
 function escapeHTML(value){
 
-return String(value || "")
-
-.replace(/&/g,"&amp;")
-
-.replace(/</g,"&lt;")
-
-.replace(/>/g,"&gt;")
-
-.replace(/"/g,"&quot;")
-
-.replace(/'/g,"&#039;");
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
 
-/* =====================================================
-   ADD TOOL
-===================================================== */
+function normalizeURL(url){
 
-function addTool(data={}){
+    url = String(url || "").trim();
 
-toolCounter++;
+    if(!url) return "#";
 
-const id =
-toolCounter;
+    if(
+        !url.startsWith("http://") &&
+        !url.startsWith("https://")
+    ){
 
-const tool =
-document.createElement("div");
+        return "https://" + url;
 
-tool.className =
-"tool-editor";
+    }
 
-tool.dataset.toolId =
-id;
-
-
-tool.innerHTML = `
-
-<div class="tool-editor-head">
-
-<span class="tool-number">
-
-TOOL ${id}
-
-</span>
-
-
-<button
-class="remove-tool"
-onclick="removeTool(this)"
-title="Remove tool">
-
-×
-
-</button>
-
-</div>
-
-
-<div class="tool-fields">
-
-
-<input
-class="input tool-icon"
-value="${escapeHTML(data.icon || "🔧")}"
-maxlength="4"
-title="Tool icon">
-
-
-<div class="tool-fields-right">
-
-
-<input
-class="input"
-data-field="name"
-value="${escapeHTML(data.name || "")}"
-placeholder="Tool Name">
-
-
-<input
-class="input"
-data-field="link"
-value="${escapeHTML(data.link || "")}"
-placeholder="https://example.com">
-
-
-<input
-class="input tool-small-full"
-data-field="description"
-value="${escapeHTML(data.description || "")}"
-placeholder="Short tool description">
-
-
-<input
-class="input tool-category"
-data-field="category"
-value="${escapeHTML(data.category || "General")}"
-placeholder="Category e.g. AI, Design, SEO">
-
-
-</div>
-
-</div>
-
-`;
-
-
-$("toolsList")
-.appendChild(tool);
-
-
-updatePreview();
+    return url;
 
 }
 
 
-/* =====================================================
-   REMOVE TOOL
-===================================================== */
+function toast(message){
 
-function removeTool(button){
+    const el =
+    document.getElementById("toast");
 
-const item =
-button.closest(
-".tool-editor"
-);
+    el.textContent = message;
 
-if(!item)
-return;
+    el.classList.add("show");
 
-
-item.style.opacity="0";
-
-item.style.transform=
-"scale(.96)";
-
-
-setTimeout(()=>{
-
-item.remove();
-
-updatePreview();
-
-},180);
+    setTimeout(()=>{
+        el.classList.remove("show");
+    },2200);
 
 }
 
 
-/* =====================================================
-   GET TOOLS
-===================================================== */
+/* ================= ADD TOOL ================= */
 
-function getTools(){
+function addTool(data = {}){
 
-const editors =
-document.querySelectorAll(
-".tool-editor"
-);
+    const tool = {
 
-const tools=[];
+        id:Date.now() + Math.random(),
 
+        icon:data.icon || "🔗",
 
-editors.forEach(editor=>{
+        name:data.name || "",
 
-const icon =
-editor
-.querySelector(".tool-icon")
-.value
-.trim();
+        link:data.link || "",
 
+        description:data.description || "",
 
-const name =
-editor
-.querySelector(
-'[data-field="name"]'
-)
-.value
-.trim();
+        category:data.category || "General"
 
+    };
 
-const link =
-editor
-.querySelector(
-'[data-field="link"]'
-)
-.value
-.trim();
+    tools.push(tool);
 
+    renderTools();
 
-const description =
-editor
-.querySelector(
-'[data-field="description"]'
-)
-.value
-.trim();
-
-
-const category =
-editor
-.querySelector(
-'[data-field="category"]'
-)
-.value
-.trim();
-
-
-if(name && link){
-
-tools.push({
-
-icon:
-icon || "🔧",
-
-name,
-
-link:
-normalizeURL(link),
-
-description:
-description ||
-"Open this tool",
-
-category:
-category ||
-"General"
-
-});
-
-}
-
-});
-
-
-return tools;
+    updatePreview();
 
 }
 
 
-/* =====================================================
-   TOOL COUNT
-===================================================== */
+/* ================= RENDER TOOLS ================= */
 
-function updateToolCount(){
+function renderTools(){
 
-const total =
-document.querySelectorAll(
-".tool-editor"
-).length;
+    toolsContainer.innerHTML = "";
 
+    tools.forEach((tool,index)=>{
 
-$("toolCount")
-.textContent =
-total +
-(total===1
-?" Tool"
-:" Tools");
+        const card =
+        document.createElement("div");
+
+        card.className = "tool-card";
+
+        card.innerHTML = `
+
+            <div class="tool-top">
+
+                <div class="tool-number">
+
+                    <span class="tool-dot"></span>
+
+                    TOOL ${index + 1}
+
+                </div>
+
+                <button
+                    class="remove-tool"
+                    onclick="removeTool('${tool.id}')">
+
+                    ×
+
+                </button>
+
+            </div>
+
+            <div class="tool-grid">
+
+                <input
+                    class="tool-icon-input"
+                    maxlength="4"
+                    value="${escapeHTML(tool.icon)}"
+                    placeholder="🤖"
+                    oninput="updateTool('${tool.id}','icon',this.value)">
+
+                <input
+                    value="${escapeHTML(tool.name)}"
+                    placeholder="Tool Name"
+                    oninput="updateTool('${tool.id}','name',this.value)">
+
+                <input
+                    value="${escapeHTML(tool.link)}"
+                    placeholder="https://example.com"
+                    oninput="updateTool('${tool.id}','link',this.value)">
+
+                <input
+                    value="${escapeHTML(tool.category)}"
+                    placeholder="Category"
+                    oninput="updateTool('${tool.id}','category',this.value)">
+
+                <input
+                    class="description"
+                    value="${escapeHTML(tool.description)}"
+                    placeholder="Short tool description"
+                    oninput="updateTool('${tool.id}','description',this.value)">
+
+            </div>
+        `;
+
+        toolsContainer.appendChild(card);
+
+    });
+
+    document.getElementById("toolCount").textContent =
+        `${tools.length} ${tools.length === 1 ? "tool" : "tools"}`;
 
 }
 
 
-/* =====================================================
-   LIVE PREVIEW
-===================================================== */
+function updateTool(id,key,value){
+
+    const tool =
+    tools.find(t => String(t.id) === String(id));
+
+    if(!tool) return;
+
+    tool[key] = value;
+
+    updatePreview();
+
+}
+
+
+function removeTool(id){
+
+    tools =
+    tools.filter(t => String(t.id) !== String(id));
+
+    renderTools();
+
+    updatePreview();
+
+}
+
+
+/* ================= PREVIEW ================= */
 
 function updatePreview(){
 
-const name =
-$("toolkitName")
-.value
-.trim()
-||
-"My Toolkit";
+    const brand =
+    document.getElementById("brandName").value;
+
+    const title =
+    document.getElementById("welcomeHeading").value;
+
+    const description =
+    document.getElementById("toolkitDescription").value;
+
+    const primary =
+    document.getElementById("primaryColor").value;
+
+    const secondary =
+    document.getElementById("secondaryColor").value;
+
+    const font =
+    document.getElementById("fontStyle").value;
+
+    document.getElementById("previewBrand")
+        .textContent =
+        brand || "YOUR BRAND";
+
+    document.getElementById("previewTitle")
+        .textContent =
+        title || "Welcome";
+
+    document.getElementById("previewDescription")
+        .textContent =
+        description || "Your toolkit description.";
+
+    document.getElementById("previewContent").style.fontFamily =
+        `'${font}', sans-serif`;
+
+    const previewTools =
+    document.getElementById("previewTools");
+
+    previewTools.innerHTML = "";
+
+    tools.forEach(tool=>{
+
+        const div =
+        document.createElement("div");
+
+        div.className = "preview-tool";
+
+        div.innerHTML = `
+
+            <div class="preview-icon"
+                 style="background:${primary}18">
+
+                ${escapeHTML(tool.icon || "🔗")}
+
+            </div>
+
+            <div>
+
+                <strong>
+                    ${escapeHTML(tool.name || "Untitled Tool")}
+                </strong>
+
+                <small>
+                    ${escapeHTML(tool.category || "General")}
+                </small>
+
+            </div>
+        `;
+
+        previewTools.appendChild(div);
+
+    });
+
+    document.documentElement.style
+        .setProperty("--primary",primary);
+
+    document.documentElement.style
+        .setProperty("--secondary",secondary);
+
+}
 
 
-const owner =
-$("ownerName")
-.value
-.trim()
-||
-"Created by You";
+/* ================= LISTENERS ================= */
 
+[
+    "toolkitName",
+    "brandName",
+    "welcomeHeading",
+    "toolkitDescription",
+    "fontStyle",
+    "primaryColor",
+    "secondaryColor"
+].forEach(id=>{
 
-const welcome =
-$("welcomeText")
-.value
-.trim()
-||
-"Welcome to my toolkit";
-
-
-const description =
-$("description")
-.value
-.trim()
-||
-"Your professional collection of useful tools.";
-
-
-$("previewName")
-.textContent =
-name;
-
-
-$("previewOwner")
-.textContent =
-owner;
-
-
-$("previewWelcome")
-.textContent =
-welcome;
-
-
-$("previewDesc")
-.textContent =
-description;
-
-
-$("previewLogo")
-.textContent =
-name
-.substring(0,2)
-.toUpperCase();
-
-
-const tools =
-getTools();
-
-
-$("previewTools")
-.innerHTML="";
-
-
-tools
-.slice(0,5)
-.forEach(tool=>{
-
-const div =
-document.createElement("div");
-
-div.className =
-"mini-tool";
-
-
-div.innerHTML = `
-
-<div class="mini-icon">
-
-${escapeHTML(tool.icon)}
-
-</div>
-
-<span>
-
-${escapeHTML(tool.name)}
-
-</span>
-
-`;
-
-
-$("previewTools")
-.appendChild(div);
+    document.getElementById(id)
+        .addEventListener("input",updatePreview);
 
 });
 
 
-if(tools.length>5){
-
-const more =
-document.createElement("div");
-
-more.className =
-"mini-tool";
-
-
-more.innerHTML = `
-
-<span>
-
-＋ ${tools.length-5}
-more tools
-
-</span>
-
-`;
-
-
-$("previewTools")
-.appendChild(more);
-
-}
-
-
-applyBuilderTheme();
-
-updateToolCount();
-
-}
-
-
-/* =====================================================
-   BUILDER THEME
-===================================================== */
-
-function applyBuilderTheme(){
-
-const primary =
-$("primaryColor").value;
-
-const secondary =
-$("secondaryColor").value;
-
-
-document.documentElement
-.style
-.setProperty(
-"--primary",
-primary
-);
-
-
-document.documentElement
-.style
-.setProperty(
-"--secondary",
-secondary
-);
-
-
-document.body.style.fontFamily =
-`"${$("fontFamily").value}", sans-serif`;
-
-}
-
-
-/* =====================================================
-   GENERATE TOOLKIT
-===================================================== */
-
-function generateToolkit(){
-
-const name =
-$("toolkitName")
-.value
-.trim();
-
-
-const owner =
-$("ownerName")
-.value
-.trim();
-
-
-const welcome =
-$("welcomeText")
-.value
-.trim();
-
-
-const description =
-$("description")
-.value
-.trim();
-
-
-const tools =
-getTools();
-
-
-if(!name){
-
-showToast(
-"Please enter your toolkit name."
-);
-
-$("toolkitName").focus();
-
-return;
-
-}
-
-
-if(!tools.length){
-
-showToast(
-"Please add at least one tool."
-);
-
-return;
-
-}
-
-
-const data={
-
-name,
-
-owner:
-owner ||
-"Toolkit Creator",
-
-welcome:
-welcome ||
-"Welcome to my toolkit",
-
-description:
-description ||
-"Professional collection of useful tools.",
-
-font:
-$("fontFamily").value,
-
-primary:
-$("primaryColor").value,
-
-secondary:
-$("secondaryColor").value,
-
-tools
-
-};
-
-
-const encoded =
-encodeData(data);
-
-
-window.location.hash =
-"toolkit="+encoded;
-
-
-loadToolkit();
-
-
-showToast(
-"Premium toolkit created!"
-);
-
-}
-
-
-/* =====================================================
-   ENCODE
-===================================================== */
+/* ================= ENCODE ================= */
 
 function encodeData(data){
 
-const json =
-JSON.stringify(data);
+    const json =
+    JSON.stringify(data);
 
-const bytes =
-new TextEncoder()
-.encode(json);
+    const bytes =
+    new TextEncoder().encode(json);
 
-let binary="";
+    let binary = "";
 
+    bytes.forEach(byte=>{
+        binary += String.fromCharCode(byte);
+    });
 
-bytes.forEach(byte=>{
-
-binary +=
-String.fromCharCode(byte);
-
-});
-
-
-return btoa(binary)
-
-.replace(/\+/g,"-")
-
-.replace(/\//g,"_")
-
-.replace(/=/g,"");
+    return btoa(binary)
+        .replace(/\+/g,"-")
+        .replace(/\//g,"_")
+        .replace(/=+$/,"");
 
 }
 
-
-/* =====================================================
-   DECODE
-===================================================== */
 
 function decodeData(encoded){
 
-try{
+    encoded =
+        encoded
+        .replace(/-/g,"+")
+        .replace(/_/g,"/");
 
-encoded =
-encoded
-.replace(/-/g,"+")
-.replace(/_/g,"/");
+    while(encoded.length % 4){
+        encoded += "=";
+    }
 
+    const binary =
+    atob(encoded);
 
-while(
-encoded.length % 4
-){
+    const bytes =
+    Uint8Array.from(binary,c=>c.charCodeAt(0));
 
-encoded += "=";
-
-}
-
-
-const binary =
-atob(encoded);
-
-
-const bytes =
-Uint8Array.from(
-binary,
-char =>
-char.charCodeAt(0)
-);
-
-
-return JSON.parse(
-
-new TextDecoder()
-.decode(bytes)
-
-);
-
-}catch(error){
-
-console.error(error);
-
-return null;
-
-}
+    return JSON.parse(
+        new TextDecoder().decode(bytes)
+    );
 
 }
 
 
-/* =====================================================
-   LOAD TOOLKIT
-===================================================== */
+/* ================= GENERATE ================= */
 
-function loadToolkit(){
+async function generateToolkit(){
 
-const hash =
-window.location.hash;
+    if(tools.length === 0){
+
+        toast("Please add at least one tool.");
+
+        return;
+
+    }
+
+    const name =
+    document.getElementById("toolkitName").value.trim();
+
+    const brand =
+    document.getElementById("brandName").value.trim();
+
+    if(!name){
+
+        toast("Enter toolkit name.");
+
+        return;
+
+    }
+
+    const data = {
+
+        version:1,
+
+        name:name,
+
+        brand:brand,
+
+        heading:
+            document.getElementById("welcomeHeading").value,
+
+        description:
+            document.getElementById("toolkitDescription").value,
+
+        font:
+            document.getElementById("fontStyle").value,
+
+        primary:
+            document.getElementById("primaryColor").value,
+
+        secondary:
+            document.getElementById("secondaryColor").value,
+
+        tools:tools.map(tool=>({
+
+            icon:tool.icon,
+
+            name:tool.name,
+
+            link:normalizeURL(tool.link),
+
+            description:tool.description,
+
+            category:tool.category
+
+        }))
+
+    };
 
 
-if(
-!hash.startsWith(
-"#toolkit="
-)
-){
+    const encoded =
+    encodeData(data);
 
-$("builderPage")
-.classList.remove(
-"hidden"
-);
 
-$("toolkitPage")
-.classList.add(
-"hidden"
-);
+    /*
+       IMPORTANT:
 
-return;
+       First this creates the real toolkit URL.
+
+       Example:
+
+       https://yourdomain.com/#toolkit=ABC123...
+
+       Then we send that URL to TinyURL.
+
+       The visitor opens the short URL,
+       TinyURL redirects to the real toolkit.
+    */
+
+    const baseURL =
+        window.location.origin +
+        window.location.pathname;
+
+    const longURL =
+        baseURL +
+        "#toolkit=" +
+        encoded;
+
+
+    const result =
+    document.getElementById("result");
+
+    const linkInput =
+    document.getElementById("generatedLink");
+
+
+    linkInput.value = "Creating short link...";
+
+    result.classList.add("show");
+
+
+    try{
+
+        const tinyURL =
+        "https://tinyurl.com/api-create.php?url=" +
+        encodeURIComponent(longURL);
+
+        const response =
+        await fetch(tinyURL);
+
+        const shortURL =
+        await response.text();
+
+        if(
+            shortURL &&
+            shortURL.startsWith("http")
+        ){
+
+            linkInput.value =
+                shortURL.trim();
+
+            localStorage.setItem(
+                "lastToolkitURL",
+                shortURL.trim()
+            );
+
+            localStorage.setItem(
+                "lastToolkitData",
+                JSON.stringify(data)
+            );
+
+            toast("Short link created!");
+
+        }else{
+
+            /*
+              If shortening service doesn't respond,
+              show the original working link.
+            */
+
+            linkInput.value =
+                longURL;
+
+            toast("Shortener unavailable — working link created.");
+
+        }
+
+    }catch(error){
+
+        linkInput.value =
+            longURL;
+
+        toast("Shortener unavailable — working link created.");
+
+    }
+
+    result.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+    });
 
 }
 
 
-const encoded =
-hash.substring(
-"#toolkit=".length
-);
+/* ================= COPY ================= */
 
+async function copyLink(){
 
-const data =
-decodeData(encoded);
+    const input =
+    document.getElementById("generatedLink");
 
+    if(!input.value) return;
 
-if(!data){
+    try{
 
-showToast(
-"Invalid toolkit link."
-);
+        await navigator.clipboard.writeText(
+            input.value
+        );
 
-return;
+        toast("Link copied!");
 
-}
+    }catch{
 
+        input.select();
 
-$("builderPage")
-.classList.add(
-"hidden"
-);
+        document.execCommand("copy");
 
+        toast("Link copied!");
 
-$("toolkitPage")
-.classList.remove(
-"hidden"
-);
-
-
-renderToolkit(data);
+    }
 
 }
 
 
-/* =====================================================
-   RENDER TOOLKIT
-===================================================== */
+/* ================= OPEN ================= */
 
-function renderToolkit(data){
+function openGeneratedToolkit(){
 
-const primary =
-data.primary ||
-"#7c3aed";
+    const link =
+    document.getElementById("generatedLink").value;
 
+    if(link){
 
-const secondary =
-data.secondary ||
-"#06b6d4";
+        window.open(
+            link,
+            "_blank",
+            "noopener,noreferrer"
+        );
 
-
-const font =
-data.font ||
-"Inter";
-
-
-const root =
-$("toolkitPage");
-
-
-root.style.setProperty(
-"--primary",
-primary
-);
-
-
-root.style.setProperty(
-"--secondary",
-secondary
-);
-
-
-root.style.setProperty(
-"--primary-glow",
-hexToRGBA(
-primary,
-.16
-)
-);
-
-
-root.style.setProperty(
-"--secondary-glow",
-hexToRGBA(
-secondary,
-.10
-)
-);
-
-
-root.style.fontFamily =
-`"${font}", sans-serif`;
-
-
-const name =
-data.name ||
-"My Toolkit";
-
-
-$("publicLogo")
-.textContent =
-name
-.substring(0,2)
-.toUpperCase();
-
-
-$("publicName")
-.textContent =
-name;
-
-
-$("publicWelcome")
-.textContent =
-data.welcome ||
-"Welcome to my toolkit";
-
-
-$("publicDescription")
-.textContent =
-data.description ||
-"";
-
-
-$("publicOwner")
-.textContent =
-data.owner ||
-"Toolkit Creator";
-
-
-/* Dynamic page title */
-
-document.title =
-name +
-" — ToolVault";
-
-
-/* Dynamic theme color */
-
-const themeMeta =
-document.querySelector(
-'meta[name="theme-color"]'
-);
-
-if(themeMeta){
-
-themeMeta.setAttribute(
-"content",
-primary
-);
+    }
 
 }
 
 
-renderTools(
-data.tools || []
-);
-
-}
-
-
-/* =====================================================
-   PUBLIC TOOLS
-===================================================== */
-
-function renderTools(tools){
-
-const container =
-$("publicTools");
-
-
-container.innerHTML="";
-
-
-if(!tools.length){
-
-container.innerHTML=`
-
-<div class="empty-tools">
-
-No tools available.
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-tools.forEach(tool=>{
-
-const card =
-document.createElement("a");
-
-
-card.className =
-"public-tool";
-
-
-card.href =
-normalizeURL(
-tool.link
-);
-
-
-card.target =
-"_blank";
-
-
-card.rel =
-"noopener noreferrer";
-
-
-card.dataset.name =
-String(
-tool.name || ""
-)
-.toLowerCase();
-
-
-card.dataset.category =
-String(
-tool.category || ""
-)
-.toLowerCase();
-
-
-card.innerHTML = `
-
-<div class="public-tool-icon">
-
-${escapeHTML(
-tool.icon || "🔧"
-)}
-
-</div>
-
-
-<div class="tool-category-badge">
-
-${escapeHTML(
-tool.category ||
-"General"
-)}
-
-</div>
-
-
-<h3>
-
-${escapeHTML(
-tool.name
-)}
-
-</h3>
-
-
-<p>
-
-${escapeHTML(
-tool.description ||
-"Open this tool"
-)}
-
-</p>
-
-
-<div class="open-label">
-
-OPEN TOOL ↗
-
-</div>
-
-`;
-
-
-container
-.appendChild(card);
-
-});
-
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-function filterTools(){
-
-const query =
-$("toolSearch")
-.value
-.toLowerCase()
-.trim();
-
-
-const cards =
-document.querySelectorAll(
-".public-tool"
-);
-
-
-cards.forEach(card=>{
-
-const name =
-card.dataset.name ||
-"";
-
-
-const category =
-card.dataset.category ||
-"";
-
-
-const match =
-name.includes(query) ||
-category.includes(query);
-
-
-card.style.display =
-match
-?""
-:"none";
-
-});
-
-}
-
-
-/* =====================================================
-   COLOR
-===================================================== */
-
-function hexToRGBA(
-hex,
-alpha
-){
-
-hex =
-hex.replace(
-"#",
-""
-);
-
-
-if(hex.length===3){
-
-hex =
-hex
-.split("")
-.map(x=>x+x)
-.join("");
-
-}
-
-
-const r =
-parseInt(
-hex.substring(0,2),
-16
-);
-
-
-const g =
-parseInt(
-hex.substring(2,4),
-16
-);
-
-
-const b =
-parseInt(
-hex.substring(4,6),
-16
-);
-
-
-return `rgba(
-${r},
-${g},
-${b},
-${alpha}
-)`;
-
-}
-
-
-/* =====================================================
-   COPY LINK
-===================================================== */
-
-async function copyCurrentLink(){
-
-try{
-
-await navigator.clipboard
-.writeText(
-window.location.href
-);
-
-
-showToast(
-"Toolkit link copied!"
-);
-
-}catch{
-
-showToast(
-"Copy failed. Copy URL manually."
-);
-
-}
-
-}
-
-
-/* =====================================================
-   CLEAR
-===================================================== */
+/* ================= CLEAR ================= */
 
 function clearAll(){
 
-if(
-!confirm(
-"Clear all toolkit data?"
-)
-){
+    if(!confirm("Clear the complete toolkit?")){
+        return;
+    }
 
-return;
+    document.getElementById("toolkitName").value =
+        "My Premium Toolkit";
 
-}
+    document.getElementById("brandName").value =
+        "Novexa Digital Agency";
 
+    document.getElementById("welcomeHeading").value =
+        "Welcome to My Toolkit";
 
-$("toolkitName").value="";
+    document.getElementById("toolkitDescription").value =
+        "Everything you need, organized in one premium toolkit.";
 
-$("ownerName").value="";
+    document.getElementById("fontStyle").value =
+        "Inter";
 
-$("welcomeText").value="";
+    document.getElementById("primaryColor").value =
+        "#7c5cff";
 
-$("description").value="";
+    document.getElementById("secondaryColor").value =
+        "#00d9ff";
 
-$("fontFamily").value="Inter";
+    tools = [];
 
-$("primaryColor").value=
-"#7c3aed";
+    addTool({
+        icon:"🤖",
+        name:"AI Assistant",
+        link:"https://chatgpt.com/",
+        description:"Powerful AI assistant",
+        category:"AI"
+    });
 
-$("secondaryColor").value=
-"#06b6d4";
+    addTool({
+        icon:"🎨",
+        name:"Design Tool",
+        link:"https://www.canva.com/",
+        description:"Create professional designs",
+        category:"Design"
+    });
 
+    document.getElementById("result")
+        .classList.remove("show");
 
-$("toolsList").innerHTML="";
-
-
-toolCounter=0;
-
-
-addTool();
-
-
-updatePreview();
-
-
-showToast(
-"Builder cleared."
-);
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-let toastTimer;
-
-
-function showToast(message){
-
-const toast =
-$("toast");
-
-
-toast.textContent =
-message;
-
-
-toast.classList.add(
-"show"
-);
-
-
-clearTimeout(
-toastTimer
-);
-
-
-toastTimer =
-setTimeout(()=>{
-
-toast.classList.remove(
-"show"
-);
-
-},2600);
+    updatePreview();
 
 }
 
 
-/* =====================================================
-   LIVE EVENTS
-===================================================== */
+/* =========================================================
+   PUBLIC TOOLKIT
+   ========================================================= */
 
-[
-"toolkitName",
-"ownerName",
-"welcomeText",
-"description",
-"fontFamily",
-"primaryColor",
-"secondaryColor"
-]
-.forEach(id=>{
+function loadToolkitFromURL(){
 
-$(id)
-.addEventListener(
-"input",
-updatePreview
-);
+    const hash =
+    window.location.hash;
 
+    if(!hash.startsWith("#toolkit=")){
 
-$(id)
-.addEventListener(
-"change",
-updatePreview
-);
+        return false;
 
-});
+    }
 
+    const encoded =
+    hash.substring("#toolkit=".length);
 
-$("toolsList")
-.addEventListener(
-"input",
-updatePreview
-);
+    try{
 
+        const data =
+        decodeData(encoded);
 
-/* =====================================================
-   DEFAULT TOOLS
-===================================================== */
+        showPublicToolkit(data);
 
-addTool({
+        return true;
 
-icon:"🤖",
+    }catch(error){
 
-name:"AI Assistant",
+        console.error(error);
 
-link:"https://chatgpt.com",
+        return false;
 
-description:
-"Powerful AI assistant for everyday tasks.",
+    }
 
-category:"AI"
-
-});
+}
 
 
-addTool({
+/* ================= PUBLIC PAGE ================= */
 
-icon:"🎨",
-
-name:"Design Tool",
-
-link:"https://www.canva.com",
-
-description:
-"Create beautiful graphics and designs.",
-
-category:"Design"
-
-});
+let currentPublicTools = [];
 
 
-/* =====================================================
-   DEFAULT BRANDING
-===================================================== */
+function showPublicToolkit(data){
 
-$("toolkitName")
-.value =
-"My AI Toolkit";
+    document
+        .getElementById("builderPage")
+        .classList.add("hidden-page");
 
+    const page =
+    document.getElementById("toolkitPage");
 
-$("ownerName")
-.value =
-"Your Brand";
+    page.classList.add("active");
 
-
-$("welcomeText")
-.value =
-"Welcome to my toolkit";
+    document.title =
+        `${data.name || "Toolkit"} — ${data.brand || "Toolkit"}`;
 
 
-$("description")
-.value =
-"A premium collection of powerful tools, resources and AI services.";
+    document.documentElement
+        .style.setProperty(
+            "--primary",
+            data.primary || "#7c5cff"
+        );
+
+    document.documentElement
+        .style.setProperty(
+            "--secondary",
+            data.secondary || "#00d9ff"
+        );
 
 
-updatePreview();
+    page.style.fontFamily =
+        `'${data.font || "Inter"}', sans-serif`;
 
 
-/* =====================================================
-   INITIAL LOAD
-===================================================== */
-
-loadToolkit();
+    document.getElementById("publicBrand")
+        .textContent =
+        data.brand || "PREMIUM TOOLKIT";
 
 
-/* =====================================================
-   HASH CHANGE
-===================================================== */
+    document.getElementById("publicTitle")
+        .textContent =
+        data.heading || data.name || "Toolkit";
 
-window.addEventListener(
-"hashchange",
-loadToolkit
-);
+
+    document.getElementById("publicDescription")
+        .textContent =
+        data.description || "";
+
+
+    currentPublicTools =
+        Array.isArray(data.tools)
+        ? data.tools
+        : [];
+
+
+    renderPublicTools(
+        currentPublicTools,
+        data.primary || "#7c5cff"
+    );
+
+}
+
+
+/* ================= PUBLIC CARDS ================= */
+
+function renderPublicTools(toolList,primary){
+
+    const container =
+    document.getElementById("publicTools");
+
+    container.innerHTML = "";
+
+
+    if(toolList.length === 0){
+
+        container.innerHTML = `
+            <div style="
+                grid-column:1/-1;
+                text-align:center;
+                padding:50px;
+                color:#9298aa;
+            ">
+                No tools found.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    toolList.forEach(tool=>{
+
+        const card =
+        document.createElement("div");
+
+        card.className =
+            "public-card";
+
+        card.style.setProperty(
+            "--tool-primary",
+            primary
+        );
+
+
+        card.onclick = ()=>{
+
+            const url =
+                normalizeURL(tool.link);
+
+            if(url !== "#"){
+
+                window.open(
+                    url,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+
+            }
+
+        };
+
+
+        card.innerHTML = `
+
+            <div
+                class="public-icon"
+                style="
+                    background:${primary}18;
+                "
+            >
+                ${escapeHTML(tool.icon || "🔗")}
+            </div>
+
+            <span class="category">
+                ${escapeHTML(tool.category || "General")}
+            </span>
+
+            <h3>
+                ${escapeHTML(tool.name || "Untitled Tool")}
+            </h3>
+
+            <p>
+                ${escapeHTML(
+                    tool.description ||
+                    "Open this tool"
+                )}
+            </p>
+
+            <span class="open-label">
+                OPEN TOOL ↗
+            </span>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchPublicTools(){
+
+    const query =
+    document
+        .getElementById("toolSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+        currentPublicTools.filter(tool=>{
+
+            const text =
+                `${tool.name || ""}
+                 ${tool.category || ""}
+                 ${tool.description || ""}`
+                .toLowerCase();
+
+            return text.includes(query);
+
+        });
+
+
+    const primary =
+        getComputedStyle(document.documentElement)
+        .getPropertyValue("--primary")
+        .trim() || "#7c5cff";
+
+
+    renderPublicTools(
+        filtered,
+        primary
+    );
+
+}
+
+
+/* ================= INIT ================= */
+
+function init(){
+
+    const isPublic =
+        loadToolkitFromURL();
+
+
+    if(!isPublic){
+
+        addTool({
+
+            icon:"🤖",
+
+            name:"AI Assistant",
+
+            link:"https://chatgpt.com/",
+
+            description:
+                "Powerful AI assistant",
+
+            category:"AI"
+
+        });
+
+
+        addTool({
+
+            icon:"🎨",
+
+            name:"Design Tool",
+
+            link:"https://www.canva.com/",
+
+            description:
+                "Create professional designs",
+
+            category:"Design"
+
+        });
+
+    }
+
+}
+
+
+init();
 
 </script>
 
