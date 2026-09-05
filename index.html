@@ -1,0 +1,3572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ToolVault — Premium Toolkit Builder</title>
+
+<meta name="description" content="Create beautiful professional toolkits with unlimited tools, custom colors, fonts and shareable links.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --bg:#05060a;
+  --panel:#0b0e15;
+  --panel2:#10141e;
+
+  --border:rgba(255,255,255,.09);
+  --border-hover:rgba(255,255,255,.18);
+
+  --text:#f8fafc;
+  --muted:#8991a3;
+
+  --primary:#7c3aed;
+  --secondary:#06b6d4;
+
+  --success:#22c55e;
+  --danger:#ef4444;
+
+  --radius:22px;
+
+  --shadow:
+    0 25px 80px rgba(0,0,0,.45);
+}
+
+/* =========================
+   RESET
+========================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+
+  color:var(--text);
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(124,58,237,.16),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(6,182,212,.12),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #030409,
+      #080a10 45%,
+      #040509
+    );
+
+  font-family:Inter,sans-serif;
+
+  overflow-x:hidden;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:-1;
+}
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(90px);
+  opacity:.16;
+  animation:floatOrb 12s ease-in-out infinite;
+}
+
+.orb.one{
+  width:400px;
+  height:400px;
+  background:var(--primary);
+  left:-150px;
+  top:10%;
+}
+
+.orb.two{
+  width:350px;
+  height:350px;
+  background:var(--secondary);
+  right:-120px;
+  top:35%;
+  animation-delay:-4s;
+}
+
+.orb.three{
+  width:300px;
+  height:300px;
+  background:#9333ea;
+  left:45%;
+  bottom:-150px;
+  animation-delay:-8s;
+}
+
+@keyframes floatOrb{
+
+  0%,100%{
+    transform:translate(0,0) scale(1);
+  }
+
+  50%{
+    transform:translate(35px,-30px) scale(1.08);
+  }
+}
+
+.grid-bg{
+  position:absolute;
+  inset:0;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    );
+
+  background-size:50px 50px;
+
+  mask-image:
+    radial-gradient(
+      ellipse at center,
+      black 20%,
+      transparent 75%
+    );
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+
+  height:76px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 5%;
+
+  border-bottom:1px solid var(--border);
+
+  background:rgba(3,4,8,.72);
+
+  backdrop-filter:blur(24px);
+
+  animation:slideDown .6s ease;
+}
+
+@keyframes slideDown{
+
+  from{
+    opacity:0;
+    transform:translateY(-20px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  font-size:19px;
+  font-weight:900;
+
+  letter-spacing:-.5px;
+}
+
+.brand-icon{
+  width:40px;
+  height:40px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+
+  box-shadow:
+    0 0 30px rgba(124,58,237,.35);
+
+  animation:logoPulse 4s ease-in-out infinite;
+}
+
+@keyframes logoPulse{
+
+  0%,100%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.05);
+  }
+
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  padding:8px 14px;
+
+  border:1px solid var(--border);
+  border-radius:999px;
+
+  color:#aeb5c4;
+
+  background:rgba(255,255,255,.035);
+
+  font-size:12px;
+}
+
+.status-dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:#22c55e;
+
+  box-shadow:
+    0 0 12px #22c55e;
+
+  animation:pulseDot 2s infinite;
+}
+
+@keyframes pulseDot{
+
+  0%,100%{
+    opacity:1;
+  }
+
+  50%{
+    opacity:.35;
+  }
+
+}
+
+/* =========================
+   BUILDER
+========================= */
+
+.builder{
+  width:min(1220px,92%);
+
+  margin:auto;
+
+  padding:
+    70px
+    0
+    110px;
+}
+
+.hero{
+  max-width:850px;
+
+  margin:
+    0
+    auto
+    55px;
+
+  text-align:center;
+
+  animation:heroIn .8s ease;
+}
+
+@keyframes heroIn{
+
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+.badge{
+  display:inline-flex;
+
+  align-items:center;
+
+  padding:8px 15px;
+
+  border:
+    1px solid
+    rgba(124,58,237,.35);
+
+  border-radius:999px;
+
+  color:#c4b5fd;
+
+  background:
+    rgba(124,58,237,.08);
+
+  font-size:11px;
+  font-weight:800;
+
+  letter-spacing:.7px;
+
+  text-transform:uppercase;
+}
+
+.hero h1{
+  margin-top:22px;
+
+  font-size:
+    clamp(40px,6vw,74px);
+
+  line-height:1;
+
+  letter-spacing:-3.5px;
+
+  font-weight:900;
+}
+
+.gradient-text{
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff,
+      var(--primary),
+      var(--secondary)
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  color:transparent;
+
+  background-size:200% auto;
+
+  animation:gradientMove 5s linear infinite;
+}
+
+@keyframes gradientMove{
+
+  to{
+    background-position:200% center;
+  }
+
+}
+
+.hero p{
+  max-width:650px;
+
+  margin:
+    22px
+    auto
+    0;
+
+  color:var(--muted);
+
+  line-height:1.8;
+
+  font-size:15px;
+}
+
+/* =========================
+   BUILDER GRID
+========================= */
+
+.builder-grid{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1.35fr)
+    minmax(330px,.65fr);
+
+  gap:20px;
+
+  align-items:start;
+}
+
+.panel{
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:var(--radius);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.015)
+    );
+
+  box-shadow:var(--shadow);
+
+  backdrop-filter:blur(24px);
+
+  overflow:hidden;
+
+  animation:panelIn .7s ease;
+}
+
+@keyframes panelIn{
+
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+.panel-header{
+  padding:24px 26px;
+
+  border-bottom:
+    1px solid
+    var(--border);
+}
+
+.panel-header h2{
+  font-size:18px;
+  font-weight:800;
+}
+
+.panel-header p{
+  margin-top:6px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+.panel-body{
+  padding:25px;
+}
+
+/* =========================
+   FORMS
+========================= */
+
+.form-grid{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:16px;
+}
+
+.field{
+  margin-bottom:17px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.field label{
+  display:block;
+
+  margin-bottom:8px;
+
+  color:#c8ceda;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  letter-spacing:.5px;
+}
+
+.input,
+.select,
+.textarea{
+  width:100%;
+
+  padding:13px 14px;
+
+  outline:none;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:13px;
+
+  color:#fff;
+
+  background:
+    rgba(0,0,0,.24);
+
+  transition:
+    border .2s,
+    box-shadow .2s,
+    transform .2s;
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover{
+  border-color:var(--border-hover);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus{
+
+  border-color:
+    var(--primary);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(124,58,237,.11);
+
+  transform:translateY(-1px);
+}
+
+.input::placeholder,
+.textarea::placeholder{
+  color:#5f6777;
+}
+
+.textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+/* =========================
+   COLORS
+========================= */
+
+.color-row{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:12px;
+}
+
+.color-box{
+  padding:10px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:13px;
+
+  background:
+    rgba(0,0,0,.22);
+}
+
+.color-box span{
+  display:block;
+
+  margin-bottom:7px;
+
+  color:var(--muted);
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+.color-input{
+  width:100%;
+  height:40px;
+
+  padding:0;
+
+  border:0;
+
+  background:transparent;
+
+  cursor:pointer;
+}
+
+/* =========================
+   TOOL EDITORS
+========================= */
+
+.tools-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  margin-bottom:12px;
+}
+
+.tool-count{
+  padding:5px 9px;
+
+  border-radius:999px;
+
+  background:
+    rgba(124,58,237,.1);
+
+  color:#bda9ff;
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+.tools-list{
+  display:flex;
+  flex-direction:column;
+
+  gap:12px;
+}
+
+.tool-editor{
+  position:relative;
+
+  padding:18px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:18px;
+
+  background:
+    rgba(0,0,0,.17);
+
+  animation:
+    toolIn .35s ease;
+
+  transition:
+    border .2s,
+    transform .2s,
+    background .2s;
+}
+
+.tool-editor:hover{
+  border-color:
+    var(--border-hover);
+
+  background:
+    rgba(255,255,255,.025);
+
+  transform:translateY(-2px);
+}
+
+@keyframes toolIn{
+
+  from{
+    opacity:0;
+    transform:translateY(10px) scale(.98);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+.tool-editor-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  margin-bottom:15px;
+}
+
+.tool-number{
+  color:#a78bfa;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:1px;
+}
+
+.remove-tool{
+  width:31px;
+  height:31px;
+
+  display:grid;
+  place-items:center;
+
+  border:0;
+
+  border-radius:9px;
+
+  color:#f87171;
+
+  background:
+    rgba(239,68,68,.08);
+
+  transition:.2s;
+}
+
+.remove-tool:hover{
+  background:
+    rgba(239,68,68,.16);
+
+  transform:rotate(90deg);
+}
+
+.tool-fields{
+  display:grid;
+
+  grid-template-columns:70px 1fr;
+
+  gap:12px;
+}
+
+.tool-icon{
+  text-align:center;
+
+  font-size:22px;
+
+  padding-left:5px;
+  padding-right:5px;
+}
+
+.tool-fields-right{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:10px;
+}
+
+.tool-small-full{
+  grid-column:1/-1;
+}
+
+.tool-category{
+  grid-column:1/-1;
+}
+
+/* =========================
+   ADD BUTTON
+========================= */
+
+.add-tool{
+  width:100%;
+
+  margin-top:14px;
+
+  padding:14px;
+
+  border:
+    1px dashed
+    rgba(124,58,237,.5);
+
+  border-radius:14px;
+
+  color:#c4b5fd;
+
+  background:
+    rgba(124,58,237,.055);
+
+  font-weight:800;
+
+  transition:.25s;
+}
+
+.add-tool:hover{
+  border-color:
+    var(--primary);
+
+  background:
+    rgba(124,58,237,.12);
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 10px 30px
+    rgba(124,58,237,.12);
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.main-actions{
+  display:flex;
+
+  gap:10px;
+
+  margin-top:22px;
+}
+
+.btn{
+  border:0;
+
+  border-radius:13px;
+
+  padding:13px 18px;
+
+  color:#fff;
+
+  font-weight:800;
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn-primary{
+  flex:1;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      #5b21b6
+    );
+
+  box-shadow:
+    0 15px 35px
+    rgba(124,58,237,.25);
+}
+
+.btn-primary:hover{
+  box-shadow:
+    0 18px 45px
+    rgba(124,58,237,.4);
+}
+
+.btn-secondary{
+  border:
+    1px solid
+    var(--border);
+
+  background:
+    rgba(255,255,255,.05);
+}
+
+/* =========================
+   LIVE PREVIEW
+========================= */
+
+.preview-box{
+  position:sticky;
+  top:96px;
+}
+
+.preview-content{
+  padding:24px;
+}
+
+.preview-card{
+  padding:21px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  transition:.3s;
+}
+
+.preview-card:hover{
+  border-color:
+    rgba(124,58,237,.25);
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.25);
+}
+
+.preview-brand{
+  display:flex;
+  align-items:center;
+
+  gap:12px;
+}
+
+.preview-logo{
+  width:46px;
+  height:46px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+
+  font-weight:900;
+
+  box-shadow:
+    0 10px 30px
+    rgba(124,58,237,.2);
+}
+
+.preview-brand h3{
+  font-size:15px;
+}
+
+.preview-brand p{
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.preview-welcome{
+  margin-top:25px;
+
+  font-size:23px;
+
+  font-weight:900;
+
+  line-height:1.2;
+}
+
+.preview-desc{
+  margin-top:10px;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  line-height:1.7;
+}
+
+.mini-tools{
+  display:grid;
+
+  gap:8px;
+
+  margin-top:20px;
+}
+
+.mini-tool{
+  display:flex;
+  align-items:center;
+
+  gap:10px;
+
+  padding:11px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:12px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  transition:.2s;
+}
+
+.mini-tool:hover{
+  transform:
+    translateX(4px);
+
+  border-color:
+    rgba(124,58,237,.25);
+}
+
+.mini-icon{
+  width:32px;
+  height:32px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:9px;
+
+  background:
+    rgba(124,58,237,.11);
+}
+
+.mini-tool span{
+  font-size:11px;
+  font-weight:700;
+}
+
+.preview-footer{
+  margin-top:16px;
+
+  padding-top:15px;
+
+  border-top:
+    1px solid
+    var(--border);
+
+  color:#626b7c;
+
+  font-size:10px;
+
+  text-align:center;
+}
+
+/* =========================
+   GENERATED TOOLKIT
+========================= */
+
+.toolkit-page{
+  min-height:100vh;
+
+  --primary:#7c3aed;
+  --secondary:#06b6d4;
+
+  background:
+    radial-gradient(
+      circle at 15% 5%,
+      var(--primary-glow),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 20%,
+      var(--secondary-glow),
+      transparent 28%
+    ),
+    #05060a;
+}
+
+.toolkit-nav{
+  position:sticky;
+  top:0;
+
+  z-index:50;
+
+  height:74px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 5%;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.08);
+
+  background:
+    rgba(5,6,10,.72);
+
+  backdrop-filter:
+    blur(24px);
+}
+
+.toolkit-brand{
+  display:flex;
+  align-items:center;
+
+  gap:12px;
+
+  font-weight:900;
+}
+
+.toolkit-logo{
+  width:40px;
+  height:40px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+
+  box-shadow:
+    0 0 30px
+    var(--primary-glow);
+}
+
+.toolkit-nav-actions{
+  display:flex;
+  gap:8px;
+}
+
+.nav-btn{
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-radius:10px;
+
+  padding:9px 14px;
+
+  color:#fff;
+
+  background:
+    rgba(255,255,255,.05);
+
+  transition:.2s;
+}
+
+.nav-btn:hover{
+  background:
+    rgba(255,255,255,.09);
+
+  transform:
+    translateY(-2px);
+}
+
+/* =========================
+   PUBLIC HERO
+========================= */
+
+.toolkit-main{
+  width:min(1180px,92%);
+
+  margin:auto;
+
+  padding:
+    80px
+    0
+    100px;
+}
+
+.toolkit-hero{
+  max-width:800px;
+
+  margin:
+    0
+    auto
+    50px;
+
+  text-align:center;
+
+  animation:
+    publicHero .8s ease;
+}
+
+@keyframes publicHero{
+
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+.toolkit-hero h1{
+  font-size:
+    clamp(40px,6vw,70px);
+
+  line-height:1.02;
+
+  letter-spacing:-3px;
+
+  font-weight:900;
+}
+
+.toolkit-hero p{
+  margin-top:18px;
+
+  color:var(--muted);
+
+  line-height:1.8;
+
+  font-size:14px;
+}
+
+.tool-search{
+  position:relative;
+
+  width:min(590px,100%);
+
+  margin:
+    27px
+    auto
+    0;
+}
+
+.tool-search input{
+  width:100%;
+
+  padding:
+    16px
+    19px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  border-radius:16px;
+
+  outline:none;
+
+  color:#fff;
+
+  background:
+    rgba(255,255,255,.045);
+
+  backdrop-filter:
+    blur(12px);
+
+  transition:.2s;
+}
+
+.tool-search input:focus{
+  border-color:
+    var(--primary);
+
+  box-shadow:
+    0 0 0 3px
+    var(--primary-glow);
+}
+
+/* =========================
+   PUBLIC TOOLS
+========================= */
+
+.tools-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:17px;
+}
+
+.public-tool{
+  position:relative;
+
+  min-height:220px;
+
+  display:flex;
+  flex-direction:column;
+
+  padding:23px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+
+  border-radius:22px;
+
+  color:#fff;
+
+  text-decoration:none;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.055),
+      rgba(255,255,255,.015)
+    );
+
+  overflow:hidden;
+
+  transition:
+    transform .3s,
+    border .3s,
+    box-shadow .3s;
+
+  animation:
+    cardIn .5s ease both;
+}
+
+.public-tool:nth-child(2){
+  animation-delay:.05s;
+}
+
+.public-tool:nth-child(3){
+  animation-delay:.1s;
+}
+
+.public-tool:nth-child(4){
+  animation-delay:.15s;
+}
+
+.public-tool:nth-child(5){
+  animation-delay:.2s;
+}
+
+.public-tool:nth-child(6){
+  animation-delay:.25s;
+}
+
+@keyframes cardIn{
+
+  from{
+    opacity:0;
+    transform:
+      translateY(20px)
+      scale(.97);
+  }
+
+  to{
+    opacity:1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+.public-tool::before{
+  content:"";
+
+  position:absolute;
+
+  width:150px;
+  height:150px;
+
+  right:-70px;
+  top:-70px;
+
+  border-radius:50%;
+
+  background:
+    var(--primary);
+
+  opacity:.11;
+
+  filter:blur(12px);
+
+  transition:.3s;
+}
+
+.public-tool::after{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  border-radius:inherit;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 35%,
+      rgba(255,255,255,.05),
+      transparent 65%
+    );
+
+  transform:
+    translateX(-120%);
+
+  transition:.7s;
+}
+
+.public-tool:hover::after{
+  transform:
+    translateX(120%);
+}
+
+.public-tool:hover{
+  transform:
+    translateY(-8px);
+
+  border-color:
+    var(--primary);
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.42),
+    0 0 35px
+    var(--primary-glow);
+}
+
+.public-tool:hover::before{
+  transform:
+    scale(1.4);
+}
+
+.public-tool-icon{
+  width:54px;
+  height:54px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:16px;
+
+  font-size:25px;
+
+  background:
+    rgba(255,255,255,.065);
+
+  border:
+    1px solid
+    rgba(255,255,255,.06);
+
+  margin-bottom:22px;
+
+  transition:.25s;
+}
+
+.public-tool:hover
+.public-tool-icon{
+  transform:
+    scale(1.08)
+    rotate(-3deg);
+
+  background:
+    var(--primary-glow);
+}
+
+.public-tool h3{
+  font-size:17px;
+
+  font-weight:800;
+
+  margin-bottom:8px;
+}
+
+.public-tool p{
+  color:#8e97a8;
+
+  font-size:12px;
+
+  line-height:1.65;
+}
+
+.tool-category-badge{
+  position:absolute;
+
+  top:18px;
+  right:18px;
+
+  padding:5px 8px;
+
+  border-radius:999px;
+
+  color:#aeb6c7;
+
+  background:
+    rgba(255,255,255,.045);
+
+  font-size:9px;
+
+  font-weight:700;
+}
+
+.open-label{
+  margin-top:auto;
+
+  padding-top:20px;
+
+  color:#bda9ff;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.5px;
+
+  transition:.2s;
+}
+
+.public-tool:hover .open-label{
+  color:#fff;
+
+  transform:
+    translateX(4px);
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty-tools{
+  grid-column:1/-1;
+
+  padding:90px 20px;
+
+  border:
+    1px dashed
+    rgba(255,255,255,.08);
+
+  border-radius:22px;
+
+  text-align:center;
+
+  color:#70798b;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.toolkit-footer{
+  width:min(1180px,92%);
+
+  margin:auto;
+
+  padding:
+    30px
+    0
+    55px;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.08);
+
+  color:#687184;
+
+  font-size:11px;
+
+  text-align:center;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+
+  left:50%;
+  bottom:25px;
+
+  z-index:999;
+
+  transform:
+    translate(-50%,30px)
+    scale(.95);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  padding:
+    13px
+    18px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.1);
+
+  border-radius:13px;
+
+  color:#fff;
+
+  background:
+    rgba(20,23,32,.95);
+
+  backdrop-filter:
+    blur(20px);
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.5);
+
+  font-size:12px;
+
+  font-weight:800;
+
+  transition:.3s;
+}
+
+.toast.show{
+  opacity:1;
+
+  transform:
+    translate(-50%,0)
+    scale(1);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+  .builder-grid{
+    grid-template-columns:1fr;
+  }
+
+  .preview-box{
+    position:relative;
+    top:auto;
+  }
+
+  .tools-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:650px){
+
+  .topbar{
+    padding:0 4%;
+  }
+
+  .status{
+    display:none;
+  }
+
+  .builder{
+    width:94%;
+
+    padding-top:45px;
+  }
+
+  .hero h1{
+    letter-spacing:-2px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .tool-fields{
+    grid-template-columns:1fr;
+  }
+
+  .tool-fields-right{
+    grid-template-columns:1fr;
+  }
+
+  .tool-small-full,
+  .tool-category{
+    grid-column:auto;
+  }
+
+  .main-actions{
+    flex-direction:column;
+  }
+
+  .tools-grid{
+    grid-template-columns:1fr;
+  }
+
+  .toolkit-nav{
+    padding:0 4%;
+  }
+
+  .toolkit-main{
+    width:94%;
+
+    padding-top:50px;
+  }
+
+  .toolkit-hero h1{
+    letter-spacing:-2px;
+  }
+
+  .nav-btn{
+    padding:
+      8px
+      10px;
+
+    font-size:10px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+
+<div class="background">
+
+  <div class="grid-bg"></div>
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+</div>
+
+
+<!-- =====================================================
+     BUILDER PAGE
+===================================================== -->
+
+<div id="builderPage">
+
+<header class="topbar">
+
+  <div class="brand">
+
+    <div class="brand-icon">
+      ✦
+    </div>
+
+    ToolVault
+
+  </div>
+
+  <div class="status">
+
+    <span class="status-dot"></span>
+
+    Builder Online
+
+  </div>
+
+</header>
+
+
+<main class="builder">
+
+<section class="hero">
+
+  <span class="badge">
+    Premium Toolkit Builder
+  </span>
+
+  <h1>
+
+    Build Your
+    <span class="gradient-text">
+      Ultimate Toolkit
+    </span>
+
+  </h1>
+
+  <p>
+
+    Create a professional toolkit with unlimited tools,
+    custom branding, premium fonts, colors and a
+    beautiful responsive interface.
+
+  </p>
+
+</section>
+
+
+<div class="builder-grid">
+
+
+<!-- =====================================================
+     BUILDER FORM
+===================================================== -->
+
+<section class="panel">
+
+<div class="panel-header">
+
+  <h2>
+    Toolkit Details
+  </h2>
+
+  <p>
+    Customize your toolkit identity and appearance.
+  </p>
+
+</div>
+
+
+<div class="panel-body">
+
+
+<div class="form-grid">
+
+
+<div class="field">
+
+<label>
+TOOLKIT NAME
+</label>
+
+<input
+id="toolkitName"
+class="input"
+placeholder="e.g. My AI Toolkit">
+
+</div>
+
+
+<div class="field">
+
+<label>
+YOUR NAME / BRAND
+</label>
+
+<input
+id="ownerName"
+class="input"
+placeholder="e.g. Novexa Digital">
+
+</div>
+
+
+<div class="field full">
+
+<label>
+WELCOME HEADING
+</label>
+
+<input
+id="welcomeText"
+class="input"
+placeholder="Welcome to my premium toolkit">
+
+</div>
+
+
+<div class="field full">
+
+<label>
+TOOLKIT DESCRIPTION
+</label>
+
+<textarea
+id="description"
+class="textarea"
+placeholder="Describe your toolkit..."></textarea>
+
+</div>
+
+
+</div>
+
+
+<div class="field">
+
+<label>
+FONT STYLE
+</label>
+
+<select
+id="fontFamily"
+class="select">
+
+<option value="Inter">
+Inter — Modern
+</option>
+
+<option value="Manrope">
+Manrope — Premium
+</option>
+
+<option value="Poppins">
+Poppins — Friendly
+</option>
+
+<option value="Space Grotesk">
+Space Grotesk — Tech
+</option>
+
+<option value="DM Sans">
+DM Sans — Clean
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+CUSTOM COLORS
+</label>
+
+<div class="color-row">
+
+<div class="color-box">
+
+<span>
+PRIMARY COLOR
+</span>
+
+<input
+id="primaryColor"
+class="color-input"
+type="color"
+value="#7c3aed">
+
+</div>
+
+
+<div class="color-box">
+
+<span>
+SECONDARY COLOR
+</span>
+
+<input
+id="secondaryColor"
+class="color-input"
+type="color"
+value="#06b6d4">
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TOOLS -->
+
+<div class="field">
+
+<div class="tools-heading">
+
+<label>
+YOUR TOOLS
+</label>
+
+<span
+id="toolCount"
+class="tool-count">
+0 Tools
+</span>
+
+</div>
+
+
+<div
+id="toolsList"
+class="tools-list">
+</div>
+
+
+<button
+class="add-tool"
+onclick="addTool()">
+
+＋ Add Another Tool
+
+</button>
+
+</div>
+
+
+<div class="main-actions">
+
+<button
+class="btn btn-secondary"
+onclick="clearAll()">
+
+Clear
+
+</button>
+
+
+<button
+class="btn btn-primary"
+onclick="generateToolkit()">
+
+✦ Generate Toolkit
+
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     LIVE PREVIEW
+===================================================== -->
+
+<section class="panel preview-box">
+
+<div class="panel-header">
+
+<h2>
+Live Preview
+</h2>
+
+<p>
+See your toolkit before publishing.
+</p>
+
+</div>
+
+
+<div class="preview-content">
+
+<div class="preview-card">
+
+
+<div class="preview-brand">
+
+<div
+id="previewLogo"
+class="preview-logo">
+
+TV
+
+</div>
+
+
+<div>
+
+<h3 id="previewName">
+My Toolkit
+</h3>
+
+<p id="previewOwner">
+Created by You
+</p>
+
+</div>
+
+</div>
+
+
+<div
+id="previewWelcome"
+class="preview-welcome">
+
+Welcome to my toolkit
+
+</div>
+
+
+<div
+id="previewDesc"
+class="preview-desc">
+
+Your professional collection of useful tools.
+
+</div>
+
+
+<div
+id="previewTools"
+class="mini-tools">
+</div>
+
+
+<div class="preview-footer">
+
+Live preview • ToolVault
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</main>
+
+</div>
+
+
+<!-- =====================================================
+     GENERATED TOOLKIT
+===================================================== -->
+
+<div
+id="toolkitPage"
+class="toolkit-page hidden">
+
+
+<nav class="toolkit-nav">
+
+
+<div class="toolkit-brand">
+
+<div
+id="publicLogo"
+class="toolkit-logo">
+
+TV
+
+</div>
+
+<span id="publicName">
+My Toolkit
+</span>
+
+</div>
+
+
+<div class="toolkit-nav-actions">
+
+<button
+class="nav-btn"
+onclick="copyCurrentLink()">
+
+🔗 Copy Link
+
+</button>
+
+</div>
+
+
+</nav>
+
+
+<main class="toolkit-main">
+
+
+<section class="toolkit-hero">
+
+
+<h1 id="publicWelcome">
+
+Welcome to my toolkit
+
+</h1>
+
+
+<p id="publicDescription">
+
+Professional collection of useful tools.
+
+</p>
+
+
+<div class="tool-search">
+
+<input
+id="toolSearch"
+placeholder="Search tools..."
+oninput="filterTools()">
+
+</div>
+
+
+</section>
+
+
+<section
+id="publicTools"
+class="tools-grid">
+
+</section>
+
+
+</main>
+
+
+<footer class="toolkit-footer">
+
+Crafted with ToolVault
+•
+Created by
+<span id="publicOwner">
+You
+</span>
+
+</footer>
+
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+id="toast"
+class="toast">
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   TOOLVAULT ENGINE
+========================================================= */
+
+const $ = id =>
+  document.getElementById(id);
+
+let toolCounter = 0;
+
+
+/* =========================================================
+   URL
+========================================================= */
+
+function normalizeURL(url){
+
+  url =
+    String(url || "")
+      .trim();
+
+  if(!url){
+    return "";
+  }
+
+  if(
+    !/^https?:\/\//i.test(url)
+  ){
+
+    url =
+      "https://" + url;
+
+  }
+
+  return url;
+}
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* =========================================================
+   ADD TOOL
+========================================================= */
+
+function addTool(data = {}){
+
+  toolCounter++;
+
+  const id =
+    toolCounter;
+
+  const tool =
+    document.createElement("div");
+
+  tool.className =
+    "tool-editor";
+
+  tool.dataset.toolId =
+    id;
+
+
+  tool.innerHTML = `
+
+    <div class="tool-editor-head">
+
+      <span class="tool-number">
+        TOOL ${id}
+      </span>
+
+      <button
+        class="remove-tool"
+        onclick="removeTool(this)"
+        title="Remove tool">
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <div class="tool-fields">
+
+
+      <input
+        class="input tool-icon"
+        value="${escapeHTML(data.icon || "🔧")}"
+        maxlength="4"
+        title="Tool icon">
+
+
+      <div class="tool-fields-right">
+
+
+        <input
+          class="input"
+          data-field="name"
+          value="${escapeHTML(data.name || "")}"
+          placeholder="Tool Name">
+
+
+        <input
+          class="input"
+          data-field="link"
+          value="${escapeHTML(data.link || "")}"
+          placeholder="https://example.com">
+
+
+        <input
+          class="input tool-small-full"
+          data-field="description"
+          value="${escapeHTML(data.description || "")}"
+          placeholder="Short tool description">
+
+
+        <input
+          class="input tool-category"
+          data-field="category"
+          value="${escapeHTML(data.category || "General")}"
+          placeholder="Category e.g. AI, Design, SEO">
+
+      </div>
+
+
+    </div>
+
+  `;
+
+
+  $("toolsList")
+    .appendChild(tool);
+
+
+  updatePreview();
+
+  updateToolCount();
+
+}
+
+
+/* =========================================================
+   REMOVE TOOL
+========================================================= */
+
+function removeTool(button){
+
+  const item =
+    button.closest(
+      ".tool-editor"
+    );
+
+  if(item){
+
+    item.style.opacity = "0";
+
+    item.style.transform =
+      "scale(.96)";
+
+    setTimeout(() => {
+
+      item.remove();
+
+      updatePreview();
+
+      updateToolCount();
+
+    },180);
+
+  }
+
+}
+
+
+/* =========================================================
+   GET TOOLS
+========================================================= */
+
+function getTools(){
+
+  const editors =
+    document.querySelectorAll(
+      ".tool-editor"
+    );
+
+  const tools = [];
+
+
+  editors.forEach(editor => {
+
+    const icon =
+      editor
+        .querySelector(".tool-icon")
+        .value
+        .trim();
+
+
+    const name =
+      editor
+        .querySelector(
+          '[data-field="name"]'
+        )
+        .value
+        .trim();
+
+
+    const link =
+      editor
+        .querySelector(
+          '[data-field="link"]'
+        )
+        .value
+        .trim();
+
+
+    const description =
+      editor
+        .querySelector(
+          '[data-field="description"]'
+        )
+        .value
+        .trim();
+
+
+    const category =
+      editor
+        .querySelector(
+          '[data-field="category"]'
+        )
+        .value
+        .trim();
+
+
+    if(name && link){
+
+      tools.push({
+
+        icon:
+          icon || "🔧",
+
+        name,
+
+        link:
+          normalizeURL(link),
+
+        description:
+          description ||
+          "Open this tool",
+
+        category:
+          category ||
+          "General"
+
+      });
+
+    }
+
+  });
+
+
+  return tools;
+
+}
+
+
+/* =========================================================
+   TOOL COUNT
+========================================================= */
+
+function updateToolCount(){
+
+  const total =
+    document.querySelectorAll(
+      ".tool-editor"
+    ).length;
+
+
+  $("toolCount").textContent =
+    total +
+    (total === 1
+      ? " Tool"
+      : " Tools");
+
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function updatePreview(){
+
+  const name =
+    $("toolkitName")
+      .value
+      .trim()
+      ||
+      "My Toolkit";
+
+
+  const owner =
+    $("ownerName")
+      .value
+      .trim()
+      ||
+      "Created by You";
+
+
+  const welcome =
+    $("welcomeText")
+      .value
+      .trim()
+      ||
+      "Welcome to my toolkit";
+
+
+  const description =
+    $("description")
+      .value
+      .trim()
+      ||
+      "Your professional collection of useful tools.";
+
+
+  $("previewName")
+    .textContent =
+    name;
+
+
+  $("previewOwner")
+    .textContent =
+    owner;
+
+
+  $("previewWelcome")
+    .textContent =
+    welcome;
+
+
+  $("previewDesc")
+    .textContent =
+    description;
+
+
+  $("previewLogo")
+    .textContent =
+    name
+      .substring(0,2)
+      .toUpperCase();
+
+
+  const tools =
+    getTools();
+
+
+  $("previewTools")
+    .innerHTML = "";
+
+
+  tools
+    .slice(0,5)
+    .forEach(tool => {
+
+      const div =
+        document.createElement("div");
+
+
+      div.className =
+        "mini-tool";
+
+
+      div.innerHTML = `
+
+        <div class="mini-icon">
+          ${escapeHTML(tool.icon)}
+        </div>
+
+        <span>
+          ${escapeHTML(tool.name)}
+        </span>
+
+      `;
+
+
+      $("previewTools")
+        .appendChild(div);
+
+    });
+
+
+  if(tools.length > 5){
+
+    const more =
+      document.createElement("div");
+
+
+    more.className =
+      "mini-tool";
+
+
+    more.innerHTML = `
+
+      <span>
+        ＋ ${tools.length - 5} more tools
+      </span>
+
+    `;
+
+
+    $("previewTools")
+      .appendChild(more);
+
+  }
+
+
+  applyBuilderTheme();
+
+  updateToolCount();
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function applyBuilderTheme(){
+
+  const primary =
+    $("primaryColor").value;
+
+  const secondary =
+    $("secondaryColor").value;
+
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--primary",
+      primary
+    );
+
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--secondary",
+      secondary
+    );
+
+
+  document.body.style.fontFamily =
+    `"${$("fontFamily").value}", sans-serif`;
+
+}
+
+
+/* =========================================================
+   GENERATE
+========================================================= */
+
+function generateToolkit(){
+
+  const name =
+    $("toolkitName")
+      .value
+      .trim();
+
+
+  const owner =
+    $("ownerName")
+      .value
+      .trim();
+
+
+  const welcome =
+    $("welcomeText")
+      .value
+      .trim();
+
+
+  const description =
+    $("description")
+      .value
+      .trim();
+
+
+  const tools =
+    getTools();
+
+
+  if(!name){
+
+    showToast(
+      "Please enter your toolkit name."
+    );
+
+    $("toolkitName")
+      .focus();
+
+    return;
+
+  }
+
+
+  if(!tools.length){
+
+    showToast(
+      "Please add at least one tool."
+    );
+
+    return;
+
+  }
+
+
+  const data = {
+
+    name,
+
+    owner:
+      owner ||
+      "Toolkit Creator",
+
+    welcome:
+      welcome ||
+      "Welcome to my toolkit",
+
+    description:
+      description ||
+      "Professional collection of useful tools.",
+
+    font:
+      $("fontFamily").value,
+
+    primary:
+      $("primaryColor").value,
+
+    secondary:
+      $("secondaryColor").value,
+
+    tools
+
+  };
+
+
+  const encoded =
+    encodeData(data);
+
+
+  const link =
+    window.location.origin +
+    window.location.pathname +
+    "#toolkit=" +
+    encoded;
+
+
+  window.location.hash =
+    "toolkit=" +
+    encoded;
+
+
+  loadToolkit();
+
+
+  showToast(
+    "Your premium toolkit is ready!"
+  );
+
+}
+
+
+/* =========================================================
+   ENCODE
+========================================================= */
+
+function encodeData(data){
+
+  const json =
+    JSON.stringify(data);
+
+
+  const bytes =
+    new TextEncoder()
+      .encode(json);
+
+
+  let binary = "";
+
+
+  bytes.forEach(byte => {
+
+    binary +=
+      String.fromCharCode(byte);
+
+  });
+
+
+  return btoa(binary)
+    .replace(/\+/g,"-")
+    .replace(/\//g,"_")
+    .replace(/=/g,"");
+
+}
+
+
+/* =========================================================
+   DECODE
+========================================================= */
+
+function decodeData(encoded){
+
+  try{
+
+    encoded =
+      encoded
+        .replace(/-/g,"+")
+        .replace(/_/g,"/");
+
+
+    while(
+      encoded.length % 4
+    ){
+
+      encoded += "=";
+
+    }
+
+
+    const binary =
+      atob(encoded);
+
+
+    const bytes =
+      Uint8Array.from(
+        binary,
+        char =>
+          char.charCodeAt(0)
+      );
+
+
+    return JSON.parse(
+
+      new TextDecoder()
+        .decode(bytes)
+
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    return null;
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD TOOLKIT
+========================================================= */
+
+function loadToolkit(){
+
+  const hash =
+    window.location.hash;
+
+
+  if(
+    !hash.startsWith(
+      "#toolkit="
+    )
+  ){
+
+    $("builderPage")
+      .classList.remove(
+        "hidden"
+      );
+
+
+    $("toolkitPage")
+      .classList.add(
+        "hidden"
+      );
+
+
+    return;
+
+  }
+
+
+  const encoded =
+    hash.substring(
+      "#toolkit=".length
+    );
+
+
+  const data =
+    decodeData(encoded);
+
+
+  if(!data){
+
+    showToast(
+      "Invalid toolkit link."
+    );
+
+    return;
+
+  }
+
+
+  $("builderPage")
+    .classList.add(
+      "hidden"
+    );
+
+
+  $("toolkitPage")
+    .classList.remove(
+      "hidden"
+    );
+
+
+  renderToolkit(data);
+
+}
+
+
+/* =========================================================
+   RENDER TOOLKIT
+========================================================= */
+
+function renderToolkit(data){
+
+  const primary =
+    data.primary ||
+    "#7c3aed";
+
+
+  const secondary =
+    data.secondary ||
+    "#06b6d4";
+
+
+  const font =
+    data.font ||
+    "Inter";
+
+
+  const root =
+    $("toolkitPage");
+
+
+  root.style.setProperty(
+    "--primary",
+    primary
+  );
+
+
+  root.style.setProperty(
+    "--secondary",
+    secondary
+  );
+
+
+  root.style.setProperty(
+    "--primary-glow",
+    hexToRGBA(
+      primary,
+      .16
+    )
+  );
+
+
+  root.style.setProperty(
+    "--secondary-glow",
+    hexToRGBA(
+      secondary,
+      .10
+    )
+  );
+
+
+  root.style.fontFamily =
+    `"${font}", sans-serif`;
+
+
+  const name =
+    data.name ||
+    "My Toolkit";
+
+
+  $("publicLogo")
+    .textContent =
+    name
+      .substring(0,2)
+      .toUpperCase();
+
+
+  $("publicName")
+    .textContent =
+    name;
+
+
+  $("publicWelcome")
+    .textContent =
+    data.welcome ||
+    "Welcome to my toolkit";
+
+
+  $("publicDescription")
+    .textContent =
+    data.description ||
+    "";
+
+
+  $("publicOwner")
+    .textContent =
+    data.owner ||
+    "Toolkit Creator";
+
+
+  renderTools(
+    data.tools ||
+    []
+  );
+
+}
+
+
+/* =========================================================
+   RENDER PUBLIC TOOLS
+========================================================= */
+
+function renderTools(tools){
+
+  const container =
+    $("publicTools");
+
+
+  container.innerHTML = "";
+
+
+  if(!tools.length){
+
+    container.innerHTML = `
+
+      <div class="empty-tools">
+
+        No tools available.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  tools.forEach((tool,index) => {
+
+    const card =
+      document.createElement("a");
+
+
+    card.className =
+      "public-tool";
+
+
+    card.href =
+      normalizeURL(
+        tool.link
+      );
+
+
+    card.target =
+      "_blank";
+
+
+    card.rel =
+      "noopener noreferrer";
+
+
+    card.dataset.name =
+      String(
+        tool.name || ""
+      ).toLowerCase();
+
+
+    card.dataset.category =
+      String(
+        tool.category || ""
+      ).toLowerCase();
+
+
+    card.innerHTML = `
+
+      <div class="public-tool-icon">
+
+        ${escapeHTML(
+          tool.icon || "🔧"
+        )}
+
+      </div>
+
+
+      <div class="tool-category-badge">
+
+        ${escapeHTML(
+          tool.category ||
+          "General"
+        )}
+
+      </div>
+
+
+      <h3>
+
+        ${escapeHTML(
+          tool.name
+        )}
+
+      </h3>
+
+
+      <p>
+
+        ${escapeHTML(
+          tool.description ||
+          "Open this tool"
+        )}
+
+      </p>
+
+
+      <div class="open-label">
+
+        OPEN TOOL ↗
+
+      </div>
+
+    `;
+
+
+    container
+      .appendChild(card);
+
+  });
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function filterTools(){
+
+  const query =
+    $("toolSearch")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  const cards =
+    document.querySelectorAll(
+      ".public-tool"
+    );
+
+
+  cards.forEach(card => {
+
+    const name =
+      card.dataset.name ||
+      "";
+
+
+    const category =
+      card.dataset.category ||
+      "";
+
+
+    const match =
+      name.includes(query) ||
+      category.includes(query);
+
+
+    card.style.display =
+      match
+        ? ""
+        : "none";
+
+  });
+
+}
+
+
+/* =========================================================
+   COLOR
+========================================================= */
+
+function hexToRGBA(
+  hex,
+  alpha
+){
+
+  hex =
+    hex.replace(
+      "#",
+      ""
+    );
+
+
+  if(hex.length === 3){
+
+    hex =
+      hex
+        .split("")
+        .map(x => x+x)
+        .join("");
+
+  }
+
+
+  const r =
+    parseInt(
+      hex.substring(0,2),
+      16
+    );
+
+
+  const g =
+    parseInt(
+      hex.substring(2,4),
+      16
+    );
+
+
+  const b =
+    parseInt(
+      hex.substring(4,6),
+      16
+    );
+
+
+  return `
+    rgba(
+      ${r},
+      ${g},
+      ${b},
+      ${alpha}
+    )
+  `;
+
+}
+
+
+/* =========================================================
+   COPY LINK
+========================================================= */
+
+async function copyCurrentLink(){
+
+  try{
+
+    await navigator.clipboard
+      .writeText(
+        window.location.href
+      );
+
+
+    showToast(
+      "Toolkit link copied!"
+    );
+
+  }catch{
+
+    showToast(
+      "Copy failed. Copy the browser URL."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+function clearAll(){
+
+  if(
+    !confirm(
+      "Clear all toolkit data?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  $("toolkitName")
+    .value = "";
+
+
+  $("ownerName")
+    .value = "";
+
+
+  $("welcomeText")
+    .value = "";
+
+
+  $("description")
+    .value = "";
+
+
+  $("fontFamily")
+    .value =
+    "Inter";
+
+
+  $("primaryColor")
+    .value =
+    "#7c3aed";
+
+
+  $("secondaryColor")
+    .value =
+    "#06b6d4";
+
+
+  $("toolsList")
+    .innerHTML = "";
+
+
+  toolCounter = 0;
+
+
+  addTool();
+
+
+  updatePreview();
+
+
+  showToast(
+    "Builder cleared."
+  );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(message){
+
+  const toast =
+    $("toast");
+
+
+  toast.textContent =
+    message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove(
+        "show"
+      );
+
+    },2600);
+
+}
+
+
+/* =========================================================
+   LIVE INPUTS
+========================================================= */
+
+[
+  "toolkitName",
+  "ownerName",
+  "welcomeText",
+  "description",
+  "fontFamily",
+  "primaryColor",
+  "secondaryColor"
+]
+.forEach(id => {
+
+  $(id)
+    .addEventListener(
+      "input",
+      updatePreview
+    );
+
+
+  $(id)
+    .addEventListener(
+      "change",
+      updatePreview
+    );
+
+});
+
+
+$("toolsList")
+  .addEventListener(
+    "input",
+    updatePreview
+  );
+
+
+/* =========================================================
+   DEFAULT DATA
+========================================================= */
+
+addTool({
+  icon:"🤖",
+  name:"AI Assistant",
+  link:"https://chatgpt.com",
+  description:
+    "Powerful AI assistant for everyday tasks.",
+  category:"AI"
+});
+
+
+addTool({
+  icon:"🎨",
+  name:"Design Tool",
+  link:"https://www.canva.com",
+  description:
+    "Create beautiful graphics and designs.",
+  category:"Design"
+});
+
+
+$("toolkitName")
+  .value =
+  "My AI Toolkit";
+
+
+$("ownerName")
+  .value =
+  "Your Brand";
+
+
+$("welcomeText")
+  .value =
+  "Welcome to my toolkit";
+
+
+$("description")
+  .value =
+  "A premium collection of powerful tools, resources and AI services.";
+
+
+updatePreview();
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+loadToolkit();
+
+
+/* =========================================================
+   HASH CHANGE
+========================================================= */
+
+window.addEventListener(
+  "hashchange",
+  loadToolkit
+);
+
+</script>
+
+</body>
+</html>
